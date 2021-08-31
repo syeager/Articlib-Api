@@ -8,7 +8,9 @@ namespace Articlib.Articles.Infra
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
             return services
-                .AddDbContext<ArticleDb>(builder => builder.UseInMemoryDatabase("articles"));
+                .AddDbContext<ArticleDb>(builder => builder.UseInMemoryDatabase("articles"))
+                .AddTransient<IArticleReadRepo, ArticleRepo>()
+                .AddTransient<IArticleWriteRepo, ArticleRepo>();
         }
     }
 }

@@ -1,6 +1,4 @@
-﻿
-using Articlib.Articles.Domain;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace Articlib.Articles.Api;
 
@@ -8,11 +6,19 @@ namespace Articlib.Articles.Api;
 [ApiController]
 public class ArticleAuthorizedController : Controller
 {
+    private readonly IArticleWriteRepo articleRepo;
+
+    public ArticleAuthorizedController(IArticleWriteRepo articleRepo)
+    {
+        this.articleRepo = articleRepo;
+    }
+
     [HttpPost("create")]
-    public ActionResult<ArticleDto> Create(string url)
+    public async Task<ActionResult<ArticleDto>> Create(string url)
     {
         var uri = new Uri(url);
-        var article = Article.Create(uri).GetModelOrThrow();
+        var validArticle = Article.Create(uri);
+        var article = await articleRepo.CreateAsync(validArticle);
         var dto = ArticleDto.ToDto(article);
         return Ok(dto);
     }

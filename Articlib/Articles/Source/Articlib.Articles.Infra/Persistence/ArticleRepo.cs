@@ -1,7 +1,7 @@
 ﻿using LittleByte.Core.Exceptions;
 using LittleByte.Validation;
 
-namespace Articlib.Articles.Infra.Persistence;
+namespace Articlib.Articles.Infra;
 
 public interface IArticleReadRepo
 {
@@ -25,7 +25,7 @@ internal sealed class ArticleRepo : IArticleWriteRepo
     public async Task<Article> CreateAsync(ValidModel<Article> article)
     {
         var domain = article.GetModelOrThrow();
-        var dao = ArticleDao.FromDomain(domain);
+        var dao = ArticleDao.FromDomain(domain, Guid.NewGuid());
         articleDb.Add(dao);
         await articleDb.SaveChangesAsync();
         return domain;

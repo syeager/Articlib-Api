@@ -5,10 +5,11 @@ internal class ArticleDao
     public Guid Id { get; set; }
     public string Url { get; set; } = null!;
 
-    internal static ArticleDao FromDomain(Article article)
+    internal static ArticleDao FromDomain(Article article, Guid id)
     {
         var dao = new ArticleDao
         {
+            Id = id,
             Url = article.Url.AbsoluteUri,
         };
         return dao;

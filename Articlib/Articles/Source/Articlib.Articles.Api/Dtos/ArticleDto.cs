@@ -12,9 +12,10 @@ public class ArticleDto
         Id = id;
         Url = url;
     }
-    
+
     public static ArticleDto ToDto(Article article)
     {
+#error how to get id?
         var articleDto = new ArticleDto(Guid.Empty, article.Url);
         return articleDto;
     }
