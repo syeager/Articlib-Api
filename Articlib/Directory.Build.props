@@ -1,0 +1,23 @@
+<Project>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>10.0</LangVersion>
+		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+		<!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
+		<Configurations>Local;Debug;Release</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<CommonBin>D:\Projects\LittleByte.Dotnet.Common\bin</CommonBin>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Serilog" Version="2.10.0" />
+		<PackageReference Include="SerilogAnalyzer" Version="0.15.0" />
+	</ItemGroup>
+</Project>
