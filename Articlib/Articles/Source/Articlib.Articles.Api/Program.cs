@@ -1,3 +1,5 @@
+using Articlib.Articles.Infra;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -5,6 +7,8 @@ builder.Services.AddOpenApiDocument(options =>
 {
     options.Title = "Articlib";
 });
+
+builder.Services.AddPersistence();
 
 var app = builder.Build();
 
