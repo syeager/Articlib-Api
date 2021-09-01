@@ -1,6 +1,7 @@
-using Articlib.Articles.Infra;
-
 var builder = WebApplication.CreateBuilder(args);
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .ReadFrom.Services(services));
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApiDocument(options =>
@@ -11,6 +12,7 @@ builder.Services.AddOpenApiDocument(options =>
 builder.Services.AddPersistence();
 
 var app = builder.Build();
+app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {
