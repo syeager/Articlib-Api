@@ -6,6 +6,7 @@ namespace Articlib.Articles.Infra;
 public interface IArticleReadRepo
 {
     public Task<Article> GetByIdAsync(Guid id);
+    Guid GetId(Article article);
 }
 
 public interface IArticleWriteRepo : IArticleReadRepo
@@ -41,5 +42,11 @@ internal sealed class ArticleRepo : IArticleWriteRepo
 
         var article = ArticleDao.ToDomain(dao);
         return article;
+    }
+
+    public Guid GetId(Article article)
+    {
+        var dao = articleDb.ChangeTracker.Entries<ArticleDao>().First();
+        return dao.Entity.Id;
     }
 }

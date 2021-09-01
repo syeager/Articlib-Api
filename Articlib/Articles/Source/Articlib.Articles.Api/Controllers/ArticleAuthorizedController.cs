@@ -19,7 +19,7 @@ public class ArticleAuthorizedController : Controller
         var uri = new Uri(url);
         var validArticle = Article.Create(uri);
         var article = await articleRepo.CreateAsync(validArticle);
-        var dto = ArticleDto.ToDto(article);
+        var dto = ArticleDto.ToDto(article, articleRepo);
         return Ok(dto);
     }
 }

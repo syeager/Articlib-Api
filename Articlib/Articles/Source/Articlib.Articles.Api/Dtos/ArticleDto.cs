@@ -1,6 +1,4 @@
-﻿using Articlib.Articles.Domain;
-
-namespace Articlib.Articles.Api;
+﻿namespace Articlib.Articles.Api;
 
 public class ArticleDto
 {
@@ -13,10 +11,10 @@ public class ArticleDto
         Url = url;
     }
 
-    public static ArticleDto ToDto(Article article)
+    public static ArticleDto ToDto(Article article, IArticleReadRepo articleRepo)
     {
-#error how to get id?
-        var articleDto = new ArticleDto(Guid.Empty, article.Url);
+        var id = articleRepo.GetId(article);
+        var articleDto = new ArticleDto(id, article.Url);
         return articleDto;
     }
 }

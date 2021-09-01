@@ -18,7 +18,7 @@ public class ArticleController : Controller
     public async Task<ActionResult<ArticleDto>> Get(Guid id)
     {
         var article = await articleRepo.GetByIdAsync(id);
-        var dto = ArticleDto.ToDto(article);
+        var dto = ArticleDto.ToDto(article, articleRepo);
         return Ok(dto);
     }
 }
