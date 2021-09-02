@@ -1,4 +1,5 @@
-﻿using LittleByte.Core.Exceptions;
+﻿using AutoMapper;
+using LittleByte.Core.Exceptions;
 using LittleByte.Validation;
 
 namespace Articlib.Articles.Infra;
@@ -17,16 +18,18 @@ public interface IArticleWriteRepo : IArticleReadRepo
 internal sealed class ArticleRepo : IArticleWriteRepo
 {
     private readonly ArticleDb articleDb;
+    private readonly IMapper mapper;
 
-    public ArticleRepo(ArticleDb articleDb)
+    public ArticleRepo(ArticleDb articleDb, IMapper mapper)
     {
         this.articleDb = articleDb;
+        this.mapper = mapper;
     }
 
     public async Task<Article> CreateAsync(ValidModel<Article> article)
     {
         var domain = article.GetModelOrThrow();
-        var dao = ArticleDao.FromDomain(domain, Guid.NewGuid());
+        var dao = mapper.Map<ArticleDao>(domain);
         articleDb.Add(dao);
         await articleDb.SaveChangesAsync();
         return domain;
@@ -40,13 +43,14 @@ internal sealed class ArticleRepo : IArticleWriteRepo
             throw new NotFoundException(typeof(Article), id);
         }
 
-        var article = ArticleDao.ToDomain(dao);
+        var article = mapper.Map<Article>(dao);
         return article;
     }
 
     public Guid GetId(Article article)
     {
-        var dao = articleDb.ChangeTracker.Entries<ArticleDao>().First();
-        return dao.Entity.Id;
+        var dao = articleDb.ChangeTracker.Entries<ArticleDao>().FirstOrDefault();
+        var id = dao?.Entity.Id ?? Guid.NewGuid();
+        return id;
     }
 }
