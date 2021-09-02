@@ -1,3 +1,5 @@
+using System.Reflection;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog((context, services, configuration) => configuration
     .ReadFrom.Configuration(context.Configuration)
@@ -10,6 +12,8 @@ builder.Services.AddOpenApiDocument(options =>
 });
 
 builder.Services.AddPersistence();
+
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
