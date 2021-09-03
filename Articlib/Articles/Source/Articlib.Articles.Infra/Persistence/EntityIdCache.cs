@@ -1,0 +1,37 @@
+﻿namespace Articlib.Articles.Infra;
+
+internal interface IEntity
+{
+    public Guid Id { get; }
+    public string Identifier { get; }
+}
+
+public interface IEntityIdReadCache
+{
+    public Guid Get(string identifier);
+}
+
+internal interface IEntityIdWriteCache : IEntityIdReadCache
+{
+    public void Add(IEntity entity);
+    public void Add(string identifier, Guid id);
+}
+
+internal class EntityIdCache : IEntityIdWriteCache
+{
+    private readonly ILogger logger = Log.ForContext<EntityIdCache>();
+    private readonly Dictionary<string, Guid> cache = new();
+
+    public void Add(IEntity entity) => Add(entity.Identifier, entity.Id);
+
+    public void Add(string identifier, Guid id)
+    {
+        logger
+            .ForContext("Entity.Id", id)
+            .ForContext("Entity.Identifier", identifier)
+            .Debug("Cache entry Id");
+        cache[identifier] = id;
+    }
+
+    public Guid Get(string identifier) => cache[identifier];
+}

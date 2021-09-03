@@ -1,1 +1,2 @@
-﻿global using Articlib.Articles.Domain;
+﻿global using Serilog;
+global using Articlib.Articles.Domain;

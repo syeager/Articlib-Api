@@ -7,7 +7,6 @@ namespace Articlib.Articles.Infra;
 public interface IArticleReadRepo
 {
     public Task<Article> GetByIdAsync(Guid id);
-    Guid GetId(Article article);
 }
 
 public interface IArticleWriteRepo : IArticleReadRepo
@@ -19,19 +18,24 @@ internal sealed class ArticleRepo : IArticleWriteRepo
 {
     private readonly ArticleDb articleDb;
     private readonly IMapper mapper;
+    private readonly IEntityIdWriteCache modelIdCache;
 
-    public ArticleRepo(ArticleDb articleDb, IMapper mapper)
+    public ArticleRepo(ArticleDb articleDb, IMapper mapper, IEntityIdWriteCache modelIdCache)
     {
         this.articleDb = articleDb;
         this.mapper = mapper;
+        this.modelIdCache = modelIdCache;
     }
 
     public async Task<Article> CreateAsync(ValidModel<Article> article)
     {
         var domain = article.GetModelOrThrow();
-        var dao = mapper.Map<ArticleDao>(domain);
+        var dao = CreateDao(domain);
         articleDb.Add(dao);
-        await articleDb.SaveChangesAsync();
+
+        //await articleDb.SaveChangesAsync();
+        await Task.CompletedTask;
+
         return domain;
     }
 
@@ -47,10 +51,11 @@ internal sealed class ArticleRepo : IArticleWriteRepo
         return article;
     }
 
-    public Guid GetId(Article article)
+    private ArticleDao CreateDao(Article domain)
     {
-        var dao = articleDb.ChangeTracker.Entries<ArticleDao>().FirstOrDefault();
-        var id = dao?.Entity.Id ?? Guid.NewGuid();
-        return id;
+        modelIdCache.Add(domain.Url.AbsoluteUri, Guid.NewGuid());
+        var dao = mapper.Map<ArticleDao>(domain);
+        modelIdCache.Add(dao);
+        return dao;
     }
 }

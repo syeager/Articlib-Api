@@ -2,8 +2,10 @@
 
 public class ArticleDto
 {
-    public Guid Id { get; }
-    public Uri Url { get; }
+    public Guid Id { get; init; }
+    public Uri Url { get; init; } = null!;
+
+    public ArticleDto() { }
 
     public ArticleDto(Guid id, Uri url)
     {
