@@ -11,7 +11,8 @@ builder.Services.AddOpenApiDocument(options =>
 
 builder.Services
     .AddPersistence()
-    .AddAutoMapper();
+    .AddAutoMapper()
+    .AddLogs();
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();

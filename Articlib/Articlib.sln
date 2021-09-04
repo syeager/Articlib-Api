@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{0517697A-06DA-41C1-BF2B-C2EEC58027AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Articlib.Articles.Domain.Test", "Articles\Test\Articlib.Articles.Domain.Test\Articlib.Articles.Domain.Test.csproj", "{8154FF17-DCF7-4BF3-8247-A56D72CE1F61}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Articlib.Articles.Domain.Test", "Articles\Test\Articlib.Articles.Domain.Test\Articlib.Articles.Domain.Test.csproj", "{8154FF17-DCF7-4BF3-8247-A56D72CE1F61}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Domain", "..\Common-DotNet\LittleByte.Domain\LittleByte.Domain.csproj", "{D5841C30-9E1B-4643-9E85-12FDEEE73E0A}"
 EndProject
@@ -32,6 +32,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Configuration", "..\Common-DotNet\LittleByte.Configuration\LittleByte.Configuration.csproj", "{4B00EFDC-F683-4601-9376-85C9555CE0F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Core", "..\Common-DotNet\LittleByte.Core\LittleByte.Core.csproj", "{D58FEEF2-B0A9-469E-9F66-307EDCADD5FE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Logging", "..\Common-DotNet\LittleByte.Logging\LittleByte.Logging.csproj", "{93D52415-CF1B-4932-AF30-DC74D49DDC27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -127,6 +129,15 @@ Global
 		{D58FEEF2-B0A9-469E-9F66-307EDCADD5FE}.Release|Any CPU.ActiveCfg = Release|x64
 		{D58FEEF2-B0A9-469E-9F66-307EDCADD5FE}.Release|x64.ActiveCfg = Release|x64
 		{D58FEEF2-B0A9-469E-9F66-307EDCADD5FE}.Release|x64.Build.0 = Release|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Debug|Any CPU.ActiveCfg = Debug|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Debug|x64.ActiveCfg = Debug|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Debug|x64.Build.0 = Debug|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Local|Any CPU.ActiveCfg = Local|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Local|x64.ActiveCfg = Local|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Local|x64.Build.0 = Local|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Release|Any CPU.ActiveCfg = Release|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Release|x64.ActiveCfg = Release|x64
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +153,7 @@ Global
 		{615FCFB3-31D4-4294-B08E-7525BD1399D3} = {F2019390-5B40-4A5F-95E4-4D406725FECC}
 		{4B00EFDC-F683-4601-9376-85C9555CE0F0} = {F2019390-5B40-4A5F-95E4-4D406725FECC}
 		{D58FEEF2-B0A9-469E-9F66-307EDCADD5FE} = {F2019390-5B40-4A5F-95E4-4D406725FECC}
+		{93D52415-CF1B-4932-AF30-DC74D49DDC27} = {F2019390-5B40-4A5F-95E4-4D406725FECC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {999CECBB-2D1A-4CF5-89BB-F25A650D1CB2}
