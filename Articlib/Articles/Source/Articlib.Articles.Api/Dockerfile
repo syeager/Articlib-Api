@@ -1,14 +1,16 @@
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 5000
+EXPOSE 5001
+
+# ENV ASPNETCORE_ENVIRONMENT=$(ASPNETCORE_ENVIRONMENT)
+# ENV ASPNETCORE_URLS=$(ASPNETCORE_URLS)
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY . .
 
 RUN dotnet restore "Articlib/Articles/Source/Articlib.Articles.Api/Articlib.Articles.Api.csproj"
-#COPY . .
 WORKDIR "/src/Articlib/Articles/Source/Articlib.Articles.Api"
 RUN dotnet build "Articlib.Articles.Api.csproj" -c Release -o /app/build
 
