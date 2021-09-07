@@ -1,4 +1,7 @@
+using Articlib.Articles.Api;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.UseSerilog();
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApiDocument(options =>
@@ -6,7 +9,13 @@ builder.Services.AddOpenApiDocument(options =>
     options.Title = "Articlib";
 });
 
+builder.Services
+    .AddPersistence()
+    .AddAutoMapper()
+    .AddLogs();
+
 var app = builder.Build();
+app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {
