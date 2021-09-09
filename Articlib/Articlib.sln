@@ -36,6 +36,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Core", "..\Commo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LittleByte.Logging", "..\Common-DotNet\LittleByte.Logging\LittleByte.Logging.csproj", "{93D52415-CF1B-4932-AF30-DC74D49DDC27}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{2A527402-F7CA-45D3-A135-6FA53AB00A88}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,18 @@ Global
 		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Release|Any CPU.ActiveCfg = Release|x64
 		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Release|x64.ActiveCfg = Release|x64
 		{93D52415-CF1B-4932-AF30-DC74D49DDC27}.Release|x64.Build.0 = Release|x64
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Debug|x64.Build.0 = Debug|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Local|Any CPU.ActiveCfg = Release|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Local|Any CPU.Build.0 = Release|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Local|x64.ActiveCfg = Release|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Local|x64.Build.0 = Release|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Release|x64.ActiveCfg = Release|Any CPU
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -155,6 +169,7 @@ Global
 		{4B00EFDC-F683-4601-9376-85C9555CE0F0} = {F2019390-5B40-4A5F-95E4-4D406725FECC}
 		{D58FEEF2-B0A9-469E-9F66-307EDCADD5FE} = {F2019390-5B40-4A5F-95E4-4D406725FECC}
 		{93D52415-CF1B-4932-AF30-DC74D49DDC27} = {F2019390-5B40-4A5F-95E4-4D406725FECC}
+		{2A527402-F7CA-45D3-A135-6FA53AB00A88} = {37B0B305-4A8A-4562-A756-CFED6E1824E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {999CECBB-2D1A-4CF5-89BB-F25A650D1CB2}
