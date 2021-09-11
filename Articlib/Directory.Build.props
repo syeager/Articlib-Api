@@ -3,8 +3,7 @@
 		<TargetFramework>net6.0</TargetFramework>
 		<LangVersion>10.0</LangVersion>
 		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
-		<!--<RuntimeIdentifier>win-x64</RuntimeIdentifier>-->
-		<Configurations>Local;Debug;Release</Configurations>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<PropertyGroup>
