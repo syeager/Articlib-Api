@@ -32,7 +32,9 @@ services:
       - logs
 
   grafana:
-    image: grafana/grafana:latest
+    build:
+        context: Services/Grafana
+        dockerfile: Dockerfile
     ports:
       - "3000:3000"
     networks:
