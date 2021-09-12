@@ -1,4 +1,5 @@
 using Articlib.Articles.Api;
+using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.UseSerilog();
@@ -27,14 +28,19 @@ else
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
-
-app.UseRouting();
+app
+    .UseHttpsRedirection()
+    .UseStaticFiles()
+    .UseRouting()
+    .UseHttpMetrics();
 
 //app.UseAuthorization();
 
-app.UseEndpoints(endpoints => endpoints.MapControllers());
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllers();
+    endpoints.MapMetrics();
+
+});
 
 app
     .UseOpenApi()
