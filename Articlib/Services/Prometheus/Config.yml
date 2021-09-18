@@ -1,8 +1,11 @@
 global:
-  scrape_interval: 15s
+  scrape_interval: 1s
   evaluation_interval: 30s
 
 scrape_configs:
   - job_name: api_articles
+    tls_config:
+      insecure_skip_verify: true
+    scheme: https
     static_configs:
-      - targets: ["articlib.articles.api:443"]
+      - targets: ["api_articles:5001"]

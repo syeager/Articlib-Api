@@ -5,8 +5,8 @@ networks:
   logs:
 
 services:
-  articlib.articles.api:
-    image: ${DOCKER_REGISTRY-}articlibarticlesapi
+  api_articles:
+    image: ${DOCKER_REGISTRY-}api_articles
     build:
       context: .
       dockerfile: Articles/Source/Articlib.Articles.Api/Dockerfile
@@ -43,6 +43,7 @@ services:
       - logs
 
   prometheus:
+    user: root
     build:
       context: Services/Prometheus
       dockerfile: Dockerfile
