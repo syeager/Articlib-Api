@@ -34,6 +34,7 @@ services:
       - logs
 
   grafana:
+    image: grafana
     build:
       context: Services/Grafana
       dockerfile: Dockerfile
@@ -43,10 +44,11 @@ services:
       - logs
 
   prometheus:
-    user: root
+    image: prometheus
     build:
       context: Services/Prometheus
       dockerfile: Dockerfile
+    user: root
     command:
       - --config.file=/etc/prometheus/prometheus.yml
     ports:
