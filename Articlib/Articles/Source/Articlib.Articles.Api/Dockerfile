@@ -20,7 +20,7 @@ COPY ["Common-DotNet/LittleByte.Validation/LittleByte.Validation.csproj", "Commo
 
 WORKDIR "/src/Articlib/Articles/Source/Articlib.Articles.Api"
 
-RUN dotnet restore "Articlib/Articles/Source/Articlib.Articles.Api/Articlib.Articles.Api.csproj"
+RUN dotnet restore "Articlib.Articles.Api.csproj"
 COPY . .
 
 RUN dotnet build "Articlib.Articles.Api.csproj" -c Release -o /app/build
