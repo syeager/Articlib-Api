@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
     - name: Build the Docker image
       run: docker build . --file ./Articlib/Articles/Source/Articlib.Articles.Api/Dockerfile --tag my-image-name:$(date +%s)
