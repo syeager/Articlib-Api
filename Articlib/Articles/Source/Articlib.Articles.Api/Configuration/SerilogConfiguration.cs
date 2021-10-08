@@ -1,4 +1,5 @@
-﻿
+﻿using Microsoft.AspNetCore.Builder;
+
 namespace Articlib.Articles.Api;
 public static class SerilogConfiguration
 {
