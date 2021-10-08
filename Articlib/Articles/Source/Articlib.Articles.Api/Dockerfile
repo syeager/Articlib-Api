@@ -7,6 +7,7 @@ EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
+COPY ["Articlib/Directory.Build.props"]
 COPY ["Articlib/Articles/Source/Articlib.Articles.Api/Articlib.Articles.Api.csproj", "Articles/Source/Articlib.Articles.Api/"]
 COPY ["Articlib/Articles/Source/Articlib.Articles.Domain/Articlib.Articles.Domain.csproj", "Articles/Source/Articlib.Articles.Domain/"]
 COPY ["Common-DotNet/LittleByte.Validation/LittleByte.Validation.csproj", "../Common-DotNet/LittleByte.Validation/"]
