@@ -7,12 +7,12 @@ EXPOSE 5001
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Articles/Source/Articlib.Articles.Api/Articlib.Articles.Api.csproj", "Articles/Source/Articlib.Articles.Api/"]
-COPY ["Articles/Source/Articlib.Articles.Domain/Articlib.Articles.Domain.csproj", "Articles/Source/Articlib.Articles.Domain/"]
+COPY ["Articlib/Articles/Source/Articlib.Articles.Api/Articlib.Articles.Api.csproj", "Articles/Source/Articlib.Articles.Api/"]
+COPY ["Articlib/Articles/Source/Articlib.Articles.Domain/Articlib.Articles.Domain.csproj", "Articles/Source/Articlib.Articles.Domain/"]
 COPY ["../Common-DotNet/LittleByte.Validation/LittleByte.Validation.csproj", "../Common-DotNet/LittleByte.Validation/"]
 COPY ["../Common-DotNet/LittleByte.Core/LittleByte.Core.csproj", "../Common-DotNet/LittleByte.Core/"]
 COPY ["../Common-DotNet/LittleByte.Domain/LittleByte.Domain.csproj", "../Common-DotNet/LittleByte.Domain/"]
-COPY ["Articles/Source/Articlib.Articles.Infra/Articlib.Articles.Infra.csproj", "Articles/Source/Articlib.Articles.Infra/"]
+COPY ["Articlib/Articles/Source/Articlib.Articles.Infra/Articlib.Articles.Infra.csproj", "Articles/Source/Articlib.Articles.Infra/"]
 COPY ["../Common-DotNet/LittleByte.Logging/LittleByte.Logging.csproj", "../Common-DotNet/LittleByte.Logging/"]
 RUN dotnet restore "Articles/Source/Articlib.Articles.Api/Articlib.Articles.Api.csproj"
 COPY . .
