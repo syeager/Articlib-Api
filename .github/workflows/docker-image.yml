@@ -2,20 +2,23 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout source
-      uses: actions/checkout@v2
-      with:
-        submodules: recursive
-    - name: Build the Docker image
-      run: docker build . --file ./Articlib/Articles/Source/Articlib.Articles.Api/Dockerfile --tag my-image-name:$(date +%s)
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+          include-prerelease: true
+      - name: Checkout source
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+      - name: Build the Docker image
+        run: docker build . --file ./Articlib/Articles/Source/Articlib.Articles.Api/Dockerfile --tag my-image-name:$(date +%s)
