@@ -6,6 +6,7 @@ networks:
 
 services:
   api_articles:
+    container_name: articlib-articles
     image: ${DOCKER_REGISTRY-}api_articles
     build:
       context: .
@@ -16,6 +17,7 @@ services:
       - app
 
   loki:
+    container_name: articlib-loki
     image: grafana/loki:2.3.0
     ports:
       - "3100:3100"
@@ -25,6 +27,7 @@ services:
       - logs
 
   promtail:
+    container_name: articlib-promtail
     image: grafana/promtail:2.3.0
     volumes:
       - /var/log/promtail:/var/log
@@ -34,6 +37,7 @@ services:
       - logs
 
   grafana:
+    container_name: articlib-grafana
     image: grafana
     build:
       context: Services/Grafana
@@ -44,6 +48,7 @@ services:
       - logs
 
   prometheus:
+    container_name: articlib-prometheus
     image: prometheus
     build:
       context: Services/Prometheus
