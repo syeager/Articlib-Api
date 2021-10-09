@@ -18,5 +18,5 @@ jobs:
 
       - name: Build
         run:
-          docker build . --file ./Articlib/Articles/Source/Articlib.Articles.Api/Dockerfile --target test \
-          && docker build . --file ./Articlib/Articles/Source/Articlib.Articles.Api/Dockerfile --tag articles:$(date +%s)
+          docker build . -f ./Articles/Source/Articlib.Articles.Api/Dockerfile --target test \
+          && docker build . -f ./Articles/Source/Articlib.Articles.Api/Dockerfile --tag articles:$(date +%s)
