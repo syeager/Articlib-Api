@@ -15,5 +15,5 @@ jobs:
         uses: actions/checkout@v2
         with:
           submodules: recursive
-      - name: Build the Docker image
-        run: docker build . --file ./Articlib/Articles/Source/Articlib.Articles.Api/Dockerfile --tag my-image-name:$(date +%s)
+      - name: Build Docker compose
+        run: docker-compose  -f "./Articlib/docker-compose.yml" -f "./Articlib/docker-compose.override.yml" -p articlib-ci --ansi never build
