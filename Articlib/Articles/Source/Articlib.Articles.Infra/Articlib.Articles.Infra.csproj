@@ -7,7 +7,7 @@
 		<PackageReference Include="Serilog.Extensions.Hosting" Version="4.1.2" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\..\Common-DotNet\LittleByte.Logging\LittleByte.Logging.csproj" />
+		<ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Logging\LittleByte.Logging.csproj" />
 		<ProjectReference Include="..\Articlib.Articles.Domain\Articlib.Articles.Domain.csproj" />
 	</ItemGroup>
 </Project>
