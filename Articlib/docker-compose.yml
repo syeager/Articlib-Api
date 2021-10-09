@@ -1,0 +1,62 @@
+version: "3.8"
+
+networks:
+  app:
+  logs:
+
+services:
+  api_articles:
+    container_name: articlib-articles
+    image: ${DOCKER_REGISTRY-}api_articles
+    build:
+      context: .
+      dockerfile: Articles/Source/Articlib.Articles.Api/Dockerfile
+    volumes:
+      - /var/log:/var/log
+    networks:
+      - app
+
+  loki:
+    container_name: articlib-loki
+    image: grafana/loki:2.3.0
+    ports:
+      - "3100:3100"
+    command:
+      - --config.file=/etc/loki/local-config.yaml
+    networks:
+      - logs
+
+  promtail:
+    container_name: articlib-promtail
+    image: grafana/promtail:2.3.0
+    volumes:
+      - /var/log/promtail:/var/log
+    command:
+      - --config.file=/etc/promtail/config.yml
+    networks:
+      - logs
+
+  grafana:
+    container_name: articlib-grafana
+    image: grafana
+    build:
+      context: Services/Grafana
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - logs
+
+  prometheus:
+    container_name: articlib-prometheus
+    image: prometheus
+    build:
+      context: Services/Prometheus
+      dockerfile: Dockerfile
+    user: root
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - app

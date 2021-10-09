@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s
+  evaluation_interval: 30s
+
+scrape_configs:
+  - job_name: api_articles
+    tls_config:
+      insecure_skip_verify: true
+    scheme: https
+    static_configs:
+      - targets: ["api_articles:5001"]
