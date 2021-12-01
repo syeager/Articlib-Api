@@ -20,7 +20,7 @@ jobs:
 
       - name: Test
         if: ${{ false }}
-        run: docker build ./Articlib -f ./Articlib/Core/Source/Articlib.Core.Api/Dockerfile --target test
+        run: docker build ./Articlib -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile --target test
 
       - name: Build
-        run: docker build ./Articlib -f ./Articlib/Core/Source/Articlib.Core.Api/Dockerfile --tag articlib-core:ci-$(date +%s)
+        run: docker build ./Articlib -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile --tag articlib-core:ci-$(date +%s)
