@@ -6,6 +6,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Infra\LittleByte.Infra.csproj" />
 		<ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Logging\LittleByte.Logging.csproj" />
 		<ProjectReference Include="..\Articlib.Articles.Domain\Articlib.Articles.Domain.csproj" />
 	</ItemGroup>

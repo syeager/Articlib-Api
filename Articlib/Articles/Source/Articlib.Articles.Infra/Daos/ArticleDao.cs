@@ -1,15 +1,10 @@
-﻿namespace Articlib.Articles.Infra;
+﻿using LittleByte.Infra.Models;
 
-internal abstract class Entity : IEntity
-{
-    public Guid Id { get; set; }
-
-    public abstract string Identifier { get; }
-}
+namespace Articlib.Articles.Infra;
 
 internal class ArticleDao : Entity
 {
-    public string Url { get; set; } = null!;
+    public string Url { get; init; } = null!;
 
     public override string Identifier => Url;
 }

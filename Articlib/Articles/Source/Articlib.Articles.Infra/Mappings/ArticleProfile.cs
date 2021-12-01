@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LittleByte.Infra;
 
 namespace Articlib.Articles.Infra;
 
@@ -10,7 +11,7 @@ internal class ArticleProfile : Profile
         CreateMap<string, Uri>().ConvertUsing(s => new Uri(s));
 
         CreateMap<Article, ArticleDao>()
-            .ForMember(a => a.Id, m => m.MapFrom((domain, dto) => modelCache.Get(domain.Url.AbsoluteUri)));
+            .ForMember(a => a.Id, m => m.MapFrom((domain, _) => modelCache.Get(domain.Url.AbsoluteUri)));
 
         CreateMap<ArticleDao, Article>();
     }

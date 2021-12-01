@@ -1,49 +1,41 @@
 ﻿using AutoMapper;
 using LittleByte.Core.Exceptions;
+using LittleByte.Infra;
 using LittleByte.Validation;
 
 namespace Articlib.Articles.Infra;
 
-public interface IArticleReadRepo
+public interface IArticleReadRepo : IRepo
 {
     public Task<Article> GetByIdAsync(Guid id);
 }
 
 public interface IArticleWriteRepo : IArticleReadRepo
 {
-    public Task<Article> CreateAsync(ValidModel<Article> article);
+    public Article Add(ValidModel<Article> article);
 }
 
-internal sealed class ArticleRepo : IArticleWriteRepo
+internal sealed class ArticleRepo : Repo<ArticleDb>, IArticleWriteRepo
 {
-    private readonly ILogger logger = Log.ForContext<ArticleRepo>();
-    private readonly ArticleDb articleDb;
-    private readonly IMapper mapper;
-    private readonly IEntityIdWriteCache modelIdCache;
-
-    public ArticleRepo(ArticleDb articleDb, IMapper mapper, IEntityIdWriteCache modelIdCache)
+    public ArticleRepo(ArticleDb dbContext, IMapper mapper, IEntityIdWriteCache modelIdCache)
+        : base(dbContext, mapper, modelIdCache)
     {
-        this.articleDb = articleDb;
-        this.mapper = mapper;
-        this.modelIdCache = modelIdCache;
     }
 
-    public async Task<Article> CreateAsync(ValidModel<Article> article)
+    public Article Add(ValidModel<Article> article)
     {
         using var context = Logs.Props();
         var domain = article.GetModelOrThrow();
         var dao = CreateDao(domain);
         logger.Information("Created article");
-        articleDb.Add(dao);
-
-        await articleDb.SaveChangesAsync();
+        dbContext.Add(dao);
 
         return domain;
     }
 
     public async Task<Article> GetByIdAsync(Guid id)
     {
-        var dao = await articleDb.FindAsync<ArticleDao>(id);
+        var dao = await dbContext.FindAsync<ArticleDao>(id);
         if(dao == null)
         {
             throw new NotFoundException(typeof(Article), id);

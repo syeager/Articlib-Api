@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Infra\LittleByte.Infra.csproj" />
+		<ProjectReference Include="..\Articlib.Users.Domain\Articlib.Users.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.0-rc.1.21452.10" />
+	</ItemGroup>
+
+</Project>

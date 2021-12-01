@@ -1,5 +1,4 @@
-﻿using System;
-using LittleByte.Validation;
+﻿using LittleByte.Validation;
 
 namespace Articlib.Articles.Domain;
 
@@ -12,10 +11,10 @@ public class Article
         Url = url;
     }
 
-    public static ValidModel<Article> Create(Uri url)
+    public static ValidModel<Article> Create(IArticleValidator articleValidator, Uri url)
     {
         var article = new Article(url);
-        var validArticle = new ArticleValidator().Sign(article);
+        var validArticle = articleValidator.Sign(article);
 
         return validArticle;
     }

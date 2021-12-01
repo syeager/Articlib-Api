@@ -5,18 +5,42 @@ networks:
   logs:
 
 services:
+  api_users:
+    build:
+        context: .
+        dockerfile: Users/Source/Articlib.Users.Api/Dockerfile
+    container_name: articlib-users
+    depends_on:
+      - database
+    environment:
+      - ASPNETCORE_URLS=https://+:5003;http://+:5002
+    image: articlib-users:local
+    networks:
+      - app
+    ports:
+        - 5002:5002
+        - 5003:5003
+    volumes:
+      - /var/log:/var/log
+
   api_articles:
     container_name: articlib-articles
     image: articlib-articles:local
-    #build:
-    #  context: .
-    #  dockerfile: Articles/Source/Articlib.Articles.Api/Dockerfile
+    build:
+      context: .
+      dockerfile: Articles/Source/Articlib.Articles.Api/Dockerfile
     volumes:
       - /var/log:/var/log
     networks:
       - app
+    ports:
+      - 5000:5000
+      - 5001:5001
     depends_on:
       - database
+      - api_users
+    environment:
+      - ASPNETCORE_URLS=https://+:5001;http://+:5000
 
   database:
     container_name: articlib-mysql
@@ -37,7 +61,7 @@ services:
     container_name: articlib-loki
     image: grafana/loki:2.3.0
     ports:
-      - "3100:3100"
+      - 3100:3100
     command:
       - --config.file=/etc/loki/local-config.yaml
     networks:
@@ -62,7 +86,7 @@ services:
       context: Services/Grafana
       dockerfile: Dockerfile
     ports:
-      - "3000:3000"
+      - 3000:3000
     networks:
       - logs
     depends_on:
@@ -78,6 +102,6 @@ services:
     command:
       - --config.file=/etc/prometheus/prometheus.yml
     ports:
-      - "9090:9090"
+      - 9090:9090
     networks:
       - app

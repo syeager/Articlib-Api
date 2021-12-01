@@ -2,6 +2,9 @@
 
 namespace Articlib.Articles.Domain;
 
-public class ArticleValidator : ModelValidator<Article>
+public interface IArticleValidator : IModelValidator<Article> { }
+
+
+public class ArticleValidator : ModelValidator<Article>, IArticleValidator
 {
 }

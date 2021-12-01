@@ -1,0 +1,70 @@
+@startuml sequence
+
+autoactivate on
+
+actor browser
+
+box "Articles" #LightBlue
+participant a.api
+participant a.domain
+participant a.infra
+end box
+
+' box "Identity" #LightGoldenRodYellow
+' participant i.api
+' participant i.domain
+' participant i.infra
+' end box
+
+collections "Web"
+database "SQL"
+database "Kafka"
+
+' box "Users" #LightCoral
+' participant u.api
+' participant u.domain
+' participant u.infra
+' end box
+
+box "Notes" #LightGreen
+participant n.api
+participant n.domain
+participant n.infra
+end box
+
+
+
+' create request
+browser -> a.api: "[P] /articles"
+
+a.api -> a.api: "get user in token"
+return
+
+a.api -> a.domain: "Article.Create"
+
+a.domain -> Web: "scrape metadata"
+return metadata
+
+a.domain -> a.infra: "repo.Add"
+
+a.infra -> SQL: "ArticleDao"
+
+return
+
+return
+
+return Article
+
+a.api -> Kafka: "ArticlePosted"
+return
+
+return ArticleDto
+
+Kafka -> n.api: "ArticlePosted"
+
+n.api -> n.domain: "ArticlePostedNotifier"
+return
+
+return
+
+@enduml

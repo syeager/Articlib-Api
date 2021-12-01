@@ -1,7 +1,5 @@
 using Articlib.Articles.Api;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using LittleByte.Extensions.AspNet;
 using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +9,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApiDocument(options =>
 {
     options.Title = "Articlib";
+    options.DocumentName = "Articles";
 });
 
 builder.Services
@@ -33,16 +32,15 @@ else
 
 app
     .UseHttpsRedirection()
-    .UseStaticFiles()
     .UseRouting()
     .UseHttpMetrics();
 
 //app.UseAuthorization();
 
-app.UseEndpoints(endpoints => {
+app.UseEndpoints(endpoints =>
+{
     endpoints.MapControllers();
     endpoints.MapMetrics();
-
 });
 
 app

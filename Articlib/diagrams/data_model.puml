@@ -1,0 +1,48 @@
+@startuml articles
+
+' package Domain {
+'     class Article {
+'     + Url: uri
+'     + site data...
+'     }
+
+'     class Post {
+'         + ArticleId: guid
+'         + UserId: guid
+'         + PostedDate: date
+'     }
+' }
+
+package Data {
+    map User {
+        Id => guid
+        Email => varchar
+        Name => varchar
+    }
+
+    map Article {
+        Id => guid
+        Url => uri
+        Title => guid
+        Author => guid
+        TagCount => uint
+        LikeCount => uint
+    }
+
+    map Post {
+        Id => [ArticleId, UserId]
+        ArticleId => guid
+        UserId => guid
+        PostedDate => date
+    }
+
+    Post::AritcleId--> Article::Id
+    Post::UserId--> User::Id
+}
+
+' where is:
+' - like count
+' - tags
+' - 
+
+@enduml

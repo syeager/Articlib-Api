@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<UserSecretsId>4412fe54-af11-4fe8-aa3a-a7f28e0a6d09</UserSecretsId>
+	</PropertyGroup>
+	
+	<PropertyGroup>
+		<Version>$(ARTICLIB_SERVICE_USER_VERSION)</Version>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+		<DockerfileContext>..\..\..</DockerfileContext>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Articles\Source\Articlib.Articles.Infra\Articlib.Articles.Infra.csproj" />
+		<ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Logging\LittleByte.Logging.csproj" />
+		<ProjectReference Include="..\..\..\Users\Source\Articlib.Users.Domain\Articlib.Users.Domain.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Extensions.AspNet\LittleByte.Extensions.AspNet.csproj" />
+		<ProjectReference Include="..\Articlib.Users.Infra\Articlib.Users.Infra.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Diagnostics.Debug" Version="4.3.0" />
+		<PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
+		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+		<PackageReference Include="AutoMapperBuilder" Version="1.1.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0" />
+		<PackageReference Include="NSwag.AspNetCore" Version="13.13.2" />
+		<PackageReference Include="prometheus-net.AspNetCore" Version="5.0.1" />
+		<PackageReference Include="Serilog.AspNetCore" Version="4.1.1-dev-00229" />
+		<PackageReference Include="Serilog.Sinks.Console" Version="4.0.1-dev-00876" />
+		<PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947" />
+	</ItemGroup>
+</Project>

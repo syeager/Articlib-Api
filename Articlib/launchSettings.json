@@ -5,6 +5,7 @@
       "commandVersion": "1.0",
       "serviceActions": {
         "api_articles": "StartWithoutDebugging",
+        "api_users": "StartWithoutDebugging",
         "database": "StartWithoutDebugging",
         "grafana": "DoNotStart",
         "loki": "DoNotStart",

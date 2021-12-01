@@ -12,6 +12,7 @@ COPY Services/ Services/
 COPY Articles/Source/ Articles/Source/
 COPY Common-DotNet/LittleByte.Core/ Common-DotNet/LittleByte.Core/
 COPY Common-DotNet/LittleByte.Domain/ Common-DotNet/LittleByte.Domain/
+COPY Common-DotNet/LittleByte.Extensions.AspNet/ Common-DotNet/LittleByte.Extensions.AspNet/
 COPY Common-DotNet/LittleByte.Logging/ Common-DotNet/LittleByte.Logging/
 COPY Common-DotNet/LittleByte.Validation/ Common-DotNet/LittleByte.Validation/
 WORKDIR /src/Articles/Source/Articlib.Articles.Api
