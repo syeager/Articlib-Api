@@ -1,5 +1,4 @@
 ﻿using Articlib.Core.Domain.Articles;
-using Articlib.Core.Infra.Articles.Daos;
 using AutoMapper;
 using LittleByte.Core.Exceptions;
 using LittleByte.Infra;
@@ -16,9 +15,9 @@ public interface IArticleWriteRepo : IArticleReadRepo, IArticleRepo
 {
 }
 
-internal sealed class ArticleRepo : Repo<ArticleDb>, IArticleWriteRepo
+internal sealed class ArticleRepo : Repo<ArticlesContext>, IArticleWriteRepo
 {
-    public ArticleRepo(ArticleDb dbContext, IMapper mapper)
+    public ArticleRepo(ArticlesContext dbContext, IMapper mapper)
         : base(dbContext, mapper)
     {
     }

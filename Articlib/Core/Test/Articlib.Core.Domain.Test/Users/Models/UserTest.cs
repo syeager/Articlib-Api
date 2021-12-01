@@ -21,7 +21,7 @@ internal class UserTest : UnitTest
     [Test]
     public void When_Valid_Return_Valid()
     {
-        var result = User.Create(validator, TV.Users.Email, TV.Users.Name);
+        var result = User.Create(validator, TV.Users.Id(), TV.Users.Email, TV.Users.Name);
 
         Assert.IsTrue(result.IsSuccess);
     }
@@ -31,7 +31,7 @@ internal class UserTest : UnitTest
     {
         validator.Sign(null!).ReturnsForAnyArgs(ValidModel.Failed<User>());
 
-        var result = User.Create(validator, TV.Users.Email, TV.Users.Name);
+        var result = User.Create(validator, TV.Users.Id(), TV.Users.Email, TV.Users.Name);
 
         Assert.IsFalse(result.IsSuccess);
     }

@@ -1,0 +1,119 @@
+version: "3.8"
+
+networks:
+  app:
+  logs:
+
+services:
+  api_core:
+    container_name: articlib-core
+    image: articlib/core:local
+    build:
+      context: ../
+      dockerfile: Core/Source/Articlib.Core.Api/articlib-core.dockerfile
+    volumes:
+      - ../../.temp/articlib-core/log:/var/log
+    networks:
+      - app
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+    depends_on:
+      - database
+      - rabbitmq
+    environment:
+      ASPNETCORE_URLS: https://+:5001;http://+:5000
+
+  api_notifications:
+    container_name: articlib-notifications
+    image: articlib/notifications:local
+    build:
+      context: ../
+      dockerfile: Notifications/Source/Articlib.Notifications.Api/articlib-notifications.dockerfile
+    volumes:
+      - ../../.temp/articlib-notiications/log:/var/log
+    networks:
+      - app
+    ports:
+      - "5002:5002"
+      - "5003:5003"
+    depends_on:
+      - database
+      - rabbitmq
+    environment:
+      ASPNETCORE_URLS: https://+:5003;http://+:5002
+
+  database:
+    command: --default-authentication-plugin=caching_sha2_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    container_name: articlib-mysql
+    image: mysql:latest
+    networks:
+      - app
+    ports:
+      - "33060:3306"
+    volumes:
+      - ./services/mysql/:/docker-entrypoint-initdb.d/
+
+  loki:
+    command: --config.file=/etc/loki/local-config.yaml
+    container_name: articlib-loki
+    image: grafana/loki:2.3.0
+    networks:
+      - logs
+    ports:
+      - "3100:3100"
+    volumes:
+      - ../../.temp/loki/log:/var/log
+
+  promtail:
+    command: --config.file=/etc/promtail/config.yml
+    container_name: articlib-promtail
+    depends_on:
+      - loki
+    image: grafana/promtail:2.3.0
+    networks:
+      - logs
+    volumes:
+      - ../../.temp/promtail/log:/var/log
+
+  grafana:
+    container_name: articlib-grafana
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - logs
+    depends_on:
+      - loki
+      - prometheus
+    volumes:
+      - ../../.temp/grafana/log:/var/log
+      - ./services/grafana/:/etc/grafana/provisioning/datasources/
+
+  prometheus:
+    command: --config.file=/etc/prometheus/prometheus.yml
+    container_name: articlib-prometheus
+    image: prom/prometheus:latest
+    networks:
+      - app
+    ports:
+      - "9090:9090"
+    volumes:
+      - ../../.temp/prometheus/log:/var/log
+      - ./services/prometheus/config.yml:/etc/prometheus/prometheus.yml
+
+  rabbitmq:
+    container_name: articlib-rabbitmq
+    environment:
+      RABBITMQ_DATA_DIR: /var/lib/rabbitmq/data/
+      RABBITMQ_LOGS: /var/lib/rabbitmq/log
+    image: rabbitmq:management
+    networks:
+      - app
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ../../.temp/rabbitmq/data:/var/lib/rabbitmq/data/
+      - ../../.temp/rabbitmq/log:/var/lib/rabbitmq
+      - ./services/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace Articlib.Core.Api.Users.Configuration;
+namespace Articlib.Core.Api.Users;
 
 public static class UserMappingConfiguration
 {

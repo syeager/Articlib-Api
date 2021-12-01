@@ -10,6 +10,6 @@ internal static partial class TV
         public const string Email = "bob@email.com";
         public static readonly string Name = new('a', NameRules.LengthMin);
 
-        public static Id<Domain.Users.User> Id() => Guid.NewGuid();
+        public static Id<User> Id() => Guid.NewGuid();
     }
 }

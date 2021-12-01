@@ -20,7 +20,9 @@ public class UserRegisterService : IUserRegisterService
 
     public Valid<User> Register(string email, string name)
     {
-        var user = User.Create(userValidator, email, name);
+        var id = Guid.NewGuid();
+        var user = User.Create(userValidator, id, email, name);
+        
         if (user.IsSuccess)
         {
             userRepo.Add(user);

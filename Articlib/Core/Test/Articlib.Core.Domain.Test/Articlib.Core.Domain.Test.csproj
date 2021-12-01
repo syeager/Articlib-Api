@@ -13,9 +13,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0-preview-20211109-03" />
 		<PackageReference Include="NSubstitute" Version="4.2.2" />
 		<PackageReference Include="NUnit" Version="3.13.2" />
-		<PackageReference Include="NUnit3TestAdapter" Version="4.0.0" />
+		<PackageReference Include="NUnit3TestAdapter" Version="4.1.0" />
+		<PackageReference Update="JetBrains.Annotations" Version="2021.3.0" />
 	</ItemGroup>
 </Project>

@@ -1,30 +1,17 @@
 ﻿using Articlib.Core.Domain.Articles;
+using Articlib.Core.Infra.Configuration;
 using LittleByte.Core.Extensions;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Articlib.Core.Infra.Articles;
 
 public static class ArticlePersistenceConfiguration
 {
-    public static IServiceCollection AddArticlePersistence(this IServiceCollection services)
+    public static IServiceCollection AddArticlePersistence(this IServiceCollection @this, IConfiguration configuration)
     {
-        return services
-            .AddDbContext()
+        return @this
+            .AddMySql<ArticlesContext>(configuration)
             .AddScoped<IArticleRepo, IArticleReadRepo, IArticleWriteRepo, ArticleRepo>();
-    }
-
-    private static IServiceCollection AddDbContext(this IServiceCollection services)
-    {
-        //string connectionString = configuration.GetConnectionString("Articlib");
-
-        // TODO: debug methods
-        return services
-            .AddDbContext<ArticleDb>(builder => builder.UseInMemoryDatabase("Articles"));
-        //.AddDbContext<ArticleDb>(builder =>
-        //    builder.UseMySql(
-        //        connectionString,
-        //        MySqlServerVersion.LatestSupportedServerVersion,
-        //        options => options.MigrationsAssembly("Articlib.Articles.DataMigration")));
     }
 }

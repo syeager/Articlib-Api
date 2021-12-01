@@ -1,5 +1,8 @@
+using Articlib.Core.Api.Articles;
 using Articlib.Core.Api.Configuration;
-using Articlib.Core.Infra.Logging;
+using Articlib.Core.Api.Users;
+using Articlib.Core.Infra.Configuration;
+using Articlib.Core.Infra.Messaging;
 using LittleByte.Extensions.AspNet;
 using LittleByte.Extensions.AspNet.Middleware;
 using Prometheus;
@@ -15,9 +18,10 @@ builder.Services.AddOpenApiDocument(options =>
 });
 
 builder.Services
-    .AddDomain()
-    .AddInfra()
+    .AddArticles(builder.Configuration)
+    .AddUsers(builder.Configuration)
     .AddAutoMapper()
+    .AddMessaging(builder.Configuration)
     .AddLogs();
 
 var app = builder.Build();

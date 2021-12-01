@@ -13,16 +13,17 @@ public interface IUserWriteRepo : IUserReadRepo, IUserRepo
 }
 
 [UsedImplicitly]
-internal class UserRepo : Repo<UserDb>, IUserWriteRepo
+internal class UserRepo : Repo<UsersContext>, IUserWriteRepo
 {
-    public UserRepo(UserDb dbContext, IMapper mapper)
+    public UserRepo(UsersContext dbContext, IMapper mapper)
         : base(dbContext, mapper)
     {
     }
 
     public void Add(Valid<User> user)
     {
-        var dao = mapper.Map<UserDao>(user);
+        var domain = user.GetModelOrThrow();
+        var dao = mapper.Map<UserDao>(domain);
         dbContext.Users.Add(dao);
     }
 }

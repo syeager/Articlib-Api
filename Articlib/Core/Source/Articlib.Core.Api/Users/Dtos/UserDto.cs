@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using LittleByte.Extensions.AspNet.Core;
 
 namespace Articlib.Core.Api.Users;
 
-public class UserDto
+public class UserDto : Dto
 {
-    public Guid Id { get; init; }
     [Required]
     public string Name { get; init; } = null!;
 }
