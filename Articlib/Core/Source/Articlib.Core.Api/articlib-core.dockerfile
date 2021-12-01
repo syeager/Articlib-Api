@@ -5,14 +5,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS source
 WORKDIR /src
 COPY Directory.Build.props .
 COPY Core/Source/ Core/Source/
-COPY Common-DotNet/LittleByte.Configuration/ Common-DotNet/LittleByte.Configuration/
-COPY Common-DotNet/LittleByte.Core/ Common-DotNet/LittleByte.Core/
-COPY Common-DotNet/LittleByte.Domain/ Common-DotNet/LittleByte.Domain/
-COPY Common-DotNet/LittleByte.Extensions.AspNet/ Common-DotNet/LittleByte.Extensions.AspNet/
-COPY Common-DotNet/LittleByte.Infra/ Common-DotNet/LittleByte.Infra/
-COPY Common-DotNet/LittleByte.Logging/ Common-DotNet/LittleByte.Logging/
-COPY Common-DotNet/LittleByte.Messaging/ Common-DotNet/LittleByte.Messaging/
-COPY Common-DotNet/LittleByte.Validation/ Common-DotNet/LittleByte.Validation/
+COPY Common-DotNet/ Common-DotNet/
 WORKDIR /src/Core/Source/Articlib.Core.Api
 RUN dotnet restore
 
