@@ -1,0 +1,48 @@
+version: "3"
+
+networks:
+  loki:
+
+services:
+  api_articles:
+    env_file: ./dev/api_articles.env
+    build:
+      context: .
+      dockerfile: ./Articles/Source/Articlib.Articles.Api/Dockerfile
+      target: base
+    image: articlibarticlesapi:dev
+    labels:
+      com.microsoft.created-by: "visual-studio"
+      com.microsoft.visual-studio.project-name: "Articlib.Articles.Api"
+    volumes:
+      - D:/Projects/Articlib/Api/Articlib/Articles/Source/Articlib.Articles.Api:/app
+      - /run/desktop/mnt/host/d/Projects/Articlib/Api:/src
+      - C:/Users/yeagz/AppData/Roaming/Microsoft/UserSecrets:/root/.microsoft/usersecrets
+      - C:/Users/yeagz/AppData/Roaming/ASP.NET/Https:/root/.aspnet/https
+      - C:/Users/yeagz/.nuget/packages/:/root/.nuget/fallbackpackages2
+      - C:/Program Files/dotnet/sdk/NuGetFallbackFolder:/root/.nuget/fallbackpackages
+      - C:/Users/yeagz/vsdbg/vs2017u5:/remote_debugger
+    tty: true
+
+  loki:
+    image: grafana/loki:2.3.0
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+    networks:
+      - loki
+
+  promtail:
+    image: grafana/promtail:2.3.0
+    volumes:
+      - /var/log:/var/log
+    command: -config.file=/etc/promtail/config.yml
+    networks:
+      - loki
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    networks:
+      - loki

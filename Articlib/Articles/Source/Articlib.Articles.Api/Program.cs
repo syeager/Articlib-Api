@@ -14,7 +14,7 @@ builder.Services.AddOpenApiDocument(options =>
 });
 
 builder.Services
-    .AddPersistence()
+    .AddPersistence(builder.Configuration)
     .AddAutoMapper()
     .AddLogs();
 

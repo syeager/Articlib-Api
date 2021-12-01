@@ -1,4 +1,5 @@
-﻿using LittleByte.Validation;
+﻿using System;
+using LittleByte.Validation;
 
 namespace Articlib.Articles.Domain;
 

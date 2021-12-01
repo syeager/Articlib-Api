@@ -36,8 +36,7 @@ internal sealed class ArticleRepo : IArticleWriteRepo
         logger.Information("Created article");
         articleDb.Add(dao);
 
-        //await articleDb.SaveChangesAsync();
-        await Task.CompletedTask;
+        await articleDb.SaveChangesAsync();
 
         return domain;
     }

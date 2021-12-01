@@ -7,12 +7,29 @@ networks:
 services:
   api_articles:
     container_name: articlib-articles
-    image: ${DOCKER_REGISTRY-}api_articles
-    build:
-      context: .
-      dockerfile: Articles/Source/Articlib.Articles.Api/Dockerfile
+    image: articlib-articles:local
+    #build:
+    #  context: .
+    #  dockerfile: Articles/Source/Articlib.Articles.Api/Dockerfile
     volumes:
       - /var/log:/var/log
+    networks:
+      - app
+    depends_on:
+      - database
+
+  database:
+    container_name: articlib-mysql
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: always
+    environment:
+      MYSQL_DATABASE: Articlib
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: pass
+    ports:
+      - 33060:3306
     networks:
       - app
 
@@ -35,10 +52,12 @@ services:
       - --config.file=/etc/promtail/config.yml
     networks:
       - logs
+    depends_on:
+      - loki
 
   grafana:
     container_name: articlib-grafana
-    image: grafana
+    image: articlib-grafana:local
     build:
       context: Services/Grafana
       dockerfile: Dockerfile
@@ -46,14 +65,16 @@ services:
       - "3000:3000"
     networks:
       - logs
+    depends_on:
+      - loki
+      - prometheus
 
   prometheus:
     container_name: articlib-prometheus
-    image: prometheus
+    image: articlib-prometheus:local
     build:
       context: Services/Prometheus
       dockerfile: Dockerfile
-    user: root
     command:
       - --config.file=/etc/prometheus/prometheus.yml
     ports:

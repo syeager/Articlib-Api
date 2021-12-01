@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "api_articles": "StartWithoutDebugging",
+        "database": "StartWithoutDebugging",
+        "grafana": "DoNotStart",
+        "loki": "DoNotStart",
+        "prometheus": "DoNotStart",
+        "promtail": "DoNotStart"
+      }
+    }
+  }
+}
