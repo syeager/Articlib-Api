@@ -1,5 +1,5 @@
 ﻿<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="articlib-debug" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+  <configuration default="false" name="articlib-lite-debug" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
     <deployment type="docker-compose.yml">
       <settings>
         <option name="envFilePath" value="" />
@@ -7,6 +7,14 @@
         <option name="secondarySourceFiles">
           <list>
             <option value="docker/docker-compose.override.yml" />
+          </list>
+        </option>
+        <option name="services">
+          <list>
+            <option value="api_core" />
+            <option value="api_notifications" />
+            <option value="database" />
+            <option value="rabbitmq" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker/docker-compose.yml" />
