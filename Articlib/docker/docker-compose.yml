@@ -53,6 +53,7 @@ services:
       - "33060:3306"
     volumes:
       - ./services/mysql/:/docker-entrypoint-initdb.d/
+      - ../../.temp/mysql/var/data/:/var/data/mysql/
 
   loki:
     command: --config.file=/etc/loki/local-config.yaml
