@@ -1,12 +1,13 @@
-﻿using LittleByte.Extensions.AspNet.Core;
-using Microsoft.Build.Framework;
+﻿using System.ComponentModel.DataAnnotations;
+using LittleByte.Extensions.AspNet.Core;
 
 namespace Articlib.Core.Api.Articles;
 
 public class ArticleDto : Dto
 {
     [Required]
-    public Uri Url { get; init; } = null!;
+    [Url]
+    public string Url { get; init; } = null!;
     [Required]
     public Guid PosterId { get; init; }
 }
