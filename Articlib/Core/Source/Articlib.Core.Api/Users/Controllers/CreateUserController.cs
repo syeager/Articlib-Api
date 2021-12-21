@@ -7,9 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Articlib.Core.Api.Users;
 
-[Route("users", Name = "Users")]
-[ApiController]
-public class CreateUserController : Controller
+public sealed class CreateUserController : UserController
 {
     private readonly IMapper mapper;
     private readonly IUserRegisterService registerService;
@@ -29,7 +27,7 @@ public class CreateUserController : Controller
     {
         var user = registerService.Register(request.Email, request.Name);
         var dto = mapper.Map<UserDto>(user.GetModelOrThrow());
-        await userRepo.SaveChangesAsync();
+        await userRepo.SaveChangesAsync(); // TODO: Repo usage is not obvious.
         return new CreatedResponse<UserDto>(dto);
     }
 }
