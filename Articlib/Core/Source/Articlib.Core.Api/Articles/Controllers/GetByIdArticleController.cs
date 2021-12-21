@@ -17,7 +17,7 @@ public sealed class GetByIdArticleController : ArticleController
         this.mapper = mapper;
     }
 
-    [HttpGet("find-by-id")]
+    [HttpGet(Routes.FindById)]
     [ResponseType(HttpStatusCode.OK, typeof(ArticleDto))]
     [ResponseType(HttpStatusCode.NotFound)]
     public async Task<ApiResponse<ArticleDto>> Get(Guid id)
