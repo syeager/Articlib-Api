@@ -114,4 +114,19 @@ public class FindUsersByIdQueryTest
 
         Assert.AreEqual(ids.Length, result.Count);
     }
+
+    // TODO: Check sql to make sure dupe ids aren't checked.
+    [Test]
+    public async Task Given_DupeIds_Then_Dedupe()
+    {
+        var entity = TV.Users.NewUser();
+        usersContext.Users.Add(entity);
+        await usersContext.SaveChangesAsync();
+
+        var ids = new []{entity.Id, entity.Id};
+
+        var result = await testObj.SendAsync(ids);
+
+        Assert.AreEqual(1, result.Count);
+    }
 }
