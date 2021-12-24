@@ -1,3 +1,4 @@
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 using FluentValidation;
 using FluentValidation.Validators;
@@ -7,7 +8,7 @@ namespace Articlib.Core.Domain.Users;
 
 internal static class NameValidatorExtension
 {
-    // ReSharper disable once UnusedMethodReturnValue.Global
+    [SuppressMessage("ReSharper", "UnusedMethodReturnValue.Global")]
     public static IRuleBuilderOptions<T, Name> IsName<T>(this IRuleBuilder<T, Name> @this)
     {
         return @this.SetValidator(new NameValidator<T>());
@@ -28,6 +29,6 @@ public static class NameRules
 {
     public const int LengthMin = 3;
     public const int LengthMax = 15;
-    public const string RegexPattern = @"^([A-z0-9\-_]){3,15}$";
+    private const string RegexPattern = @"^([A-z0-9\-_]){3,15}$";
     public static readonly Regex Regex = new(RegexPattern);
 }

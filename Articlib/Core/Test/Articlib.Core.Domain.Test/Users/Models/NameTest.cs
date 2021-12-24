@@ -1,7 +1,7 @@
 ﻿using Articlib.Core.Domain.Users;
 using NUnit.Framework;
 
-namespace Articlib.Core.Domain.Test.Users.Models;
+namespace Articlib.Core.Domain.Test.Users;
 
 public class NameTest
 {
