@@ -1,6 +1,6 @@
 ﻿using Articlib.Core.Domain.Articles;
 using Articlib.Core.Domain.Users;
-using LittleByte;
+using LittleByte.Core.Common;
 using LittleByte.Domain;
 using LittleByte.Validation.Test;
 using LittleByte.Validation.Test.TestUtilities;

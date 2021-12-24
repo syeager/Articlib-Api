@@ -1,7 +1,7 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 using FluentValidation;
 using FluentValidation.Validators;
-using LittleByte;
+using LittleByte.Core.Common;
 
 namespace Articlib.Core.Domain.Users;
 
