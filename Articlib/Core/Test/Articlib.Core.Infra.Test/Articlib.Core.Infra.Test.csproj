@@ -4,6 +4,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Extensions.AutoMapper\LittleByte.Extensions.AutoMapper.csproj" />
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Test.EntityFramework\LittleByte.Test.EntityFramework.csproj" />
         <ProjectReference Include="..\..\Source\Articlib.Core.Infra\Articlib.Core.Infra.csproj" />
     </ItemGroup>
 
