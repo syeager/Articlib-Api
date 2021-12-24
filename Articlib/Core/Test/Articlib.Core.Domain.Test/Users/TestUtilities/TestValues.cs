@@ -3,7 +3,7 @@ using LittleByte.Domain;
 
 namespace Articlib.Core.Domain.Test.Users;
 
-internal static partial class Valid
+internal static class Valid
 {
     public static class User
     {

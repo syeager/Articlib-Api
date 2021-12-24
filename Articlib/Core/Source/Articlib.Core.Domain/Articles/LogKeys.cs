@@ -4,7 +4,8 @@ using LittleByte.Logging;
 namespace Articlib.Core.Domain.Articles;
 
 [ExcludeFromCodeCoverage]
-public static partial class LK
+[SuppressMessage("ReSharper", "InconsistentNaming")]
+public static class LK
 {
     public static class Article
     {

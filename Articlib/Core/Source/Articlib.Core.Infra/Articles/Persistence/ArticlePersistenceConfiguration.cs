@@ -12,6 +12,7 @@ public static class ArticlePersistenceConfiguration
     {
         return @this
             .AddMySql<ArticlesContext>(configuration)
+            .AddScoped<IArticleFilterRepo, ArticleFilterRepo>()
             .AddScoped<IArticleRepo, IArticleReadRepo, IArticleWriteRepo, ArticleRepo>();
     }
 }

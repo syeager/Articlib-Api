@@ -10,6 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Extensions.AutoMapper\LittleByte.Extensions.AutoMapper.csproj" />
 		<ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Messaging\LittleByte.Messaging.csproj" />
 		<ProjectReference Include="..\Articlib.Core.Domain\Articlib.Core.Domain.csproj" />
 		<ProjectReference Include="..\Articlib.Core.Infra\Articlib.Core.Infra.csproj" />

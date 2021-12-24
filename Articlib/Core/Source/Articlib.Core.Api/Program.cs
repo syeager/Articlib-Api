@@ -30,6 +30,7 @@ app.UseSerilogRequestLogging();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+    app.UseCors(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 }
 else
 {
