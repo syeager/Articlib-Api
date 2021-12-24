@@ -2,6 +2,7 @@
 using Articlib.Core.Infra.Users;
 using AutoMapper;
 using LittleByte.Extensions.AspNet.Responses;
+using LittleByte.Extensions.AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Articlib.Core.Api.Users;
@@ -22,7 +23,7 @@ public sealed class BatchGetByIdUserController : UserController
     public async Task<ApiResponse<UserDto[]>> Get(Guid[] ids)
     {
         var users = await query.SendAsync(ids);
-        var dtos = users.Select(u => mapper.Map<UserDto>(u)).ToArray();
+        var dtos = mapper.MapRange<UserDto>(users);
         return new OkResponse<UserDto[]>(dtos);
     }
 }
