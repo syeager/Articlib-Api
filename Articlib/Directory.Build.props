@@ -1,20 +1,20 @@
 <Project>
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<LangVersion>10.0</LangVersion>
-		<RuntimeIdentifier>linux-x64</RuntimeIdentifier>
-		<Configurations>Debug;Release</Configurations>
-		<Platforms>ARM64</Platforms>
-	</PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>10.0</LangVersion>
+        <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+        <Configurations>Debug;Release</Configurations>
+        <Platforms>ARM64</Platforms>
+    </PropertyGroup>
 
-	<PropertyGroup>
-		<Nullable>enable</Nullable>
-		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<ImplicitUsings>enable</ImplicitUsings>
-	</PropertyGroup>
+    <PropertyGroup>
+        <Nullable>enable</Nullable>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <ImplicitUsings>enable</ImplicitUsings>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="JetBrains.Annotations" Version="2021.3.0" />
-		<PackageReference Include="SerilogAnalyzer" Version="0.15.0" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2021.3.0"/>
+        <PackageReference Include="SerilogAnalyzer" Version="0.15.0"/>
+    </ItemGroup>
 </Project>

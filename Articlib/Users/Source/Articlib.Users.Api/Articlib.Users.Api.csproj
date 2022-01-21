@@ -1,0 +1,44 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+        <DockerfileContext>..\..\..</DockerfileContext>
+        <UserSecretsId>825bccb9-30c8-49db-a585-08490d712294</UserSecretsId>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Identity\LittleByte.Identity.csproj"/>
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Messaging\LittleByte.Messaging.csproj"/>
+        <ProjectReference Include="..\Articlib.Users.Domain\Articlib.Users.Domain.csproj"/>
+        <ProjectReference Include="..\Articlib.Users.Infra\Articlib.Users.Infra.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Extensions.AutoMapper\LittleByte.Extensions.AutoMapper.csproj"/>
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Extensions.AspNet\LittleByte.Extensions.AspNet.csproj"/>
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Logging\LittleByte.Logging.csproj"/>
+
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="RabbitMQ.Client" Version="6.2.2"/>
+        <PackageReference Include="System.Diagnostics.Debug" Version="4.3.0"/>
+        <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0"/>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1"/>
+        <PackageReference Include="AutoMapperBuilder" Version="1.1.0"/>
+        <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.14.0"/>
+        <PackageReference Include="NSwag.AspNetCore" Version="13.14.3"/>
+        <PackageReference Include="prometheus-net.AspNetCore" Version="5.0.1"/>
+        <PackageReference Include="Serilog.AspNetCore" Version="4.1.1-dev-00241"/>
+        <PackageReference Include="Serilog.Sinks.Console" Version="4.0.1-dev-00879"/>
+        <PackageReference Include="Serilog.Sinks.Debug" Version="2.0.0"/>
+        <PackageReference Include="Serilog.Sinks.File" Version="5.0.1-dev-00947"/>
+        <PackageReference Update="JetBrains.Annotations" Version="2021.3.0"/>
+    </ItemGroup>
+
+</Project>

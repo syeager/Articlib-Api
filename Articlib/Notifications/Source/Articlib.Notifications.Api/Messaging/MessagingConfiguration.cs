@@ -8,6 +8,6 @@ public static class MessagingConfiguration
     {
         return
             @this.AddSingleton<ArticleCreatedConsumer>()
-            .AddInfraMessaging(configuration);
+                .AddInfraMessaging(configuration);
     }
 }

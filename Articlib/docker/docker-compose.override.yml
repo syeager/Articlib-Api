@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  api_core:
+  api_articles:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:
@@ -10,6 +10,14 @@ services:
       - ${USERPROFILE}/.aspnet/https:/root/.aspnet/https:ro
 
   api_notifications:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/var/log:/var/log
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${USERPROFILE}/.aspnet/https:/root/.aspnet/https:ro
+
+  api_users:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     volumes:

@@ -11,8 +11,9 @@
         </option>
         <option name="services">
           <list>
-            <option value="api_core" />
+            <option value="api_articles" />
             <option value="api_notifications" />
+            <option value="api_users" />
             <option value="database" />
             <option value="rabbitmq" />
           </list>

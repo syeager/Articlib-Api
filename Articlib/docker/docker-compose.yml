@@ -5,14 +5,14 @@ networks:
   logs:
 
 services:
-  api_core:
-    container_name: articlib-core
-    image: articlib/core:local
+  api_articles:
+    container_name: articlib-articles
+    image: articlib/articles:local
     build:
       context: ../
-      dockerfile: Core/Source/Articlib.Core.Api/articlib-core.dockerfile
+      dockerfile: Articles/Source/Articlib.Articles.Api/articlib-articles.dockerfile
     volumes:
-      - ../../.temp/articlib-core/log:/var/log
+      - ../../.temp/articlib-articles/log:/var/log
     networks:
       - app
     ports:
@@ -42,6 +42,26 @@ services:
       - rabbitmq
     environment:
       ASPNETCORE_URLS: https://+:5003;http://+:5002
+
+  api_users:
+    container_name: articlib-users
+    image: articlib/users:local
+    build:
+      context: ../
+      dockerfile: Users/Source/Articlib.Users.Api/articlib-users.dockerfile
+    volumes:
+      - ../../.temp/articlib-notiications/log:/var/log
+    networks:
+      - app
+    ports:
+      - "5004:5004"
+      - "5005:5005"
+    depends_on:
+      - database
+      - rabbitmq
+    environment:
+      ASPNETCORE_URLS: https://+:5005;http://+:5004
+
 
   database:
     command: --default-authentication-plugin=caching_sha2_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
