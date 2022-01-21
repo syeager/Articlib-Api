@@ -1,139 +1,147 @@
 version: "3.8"
 
 networks:
-  app:
-  logs:
+    app:
+    logs:
 
 services:
-  api_articles:
-    container_name: articlib-articles
-    image: articlib/articles:local
-    build:
-      context: ../
-      dockerfile: Articles/Source/Articlib.Articles.Api/articlib-articles.dockerfile
-    volumes:
-      - ../../.temp/articlib-articles/log:/var/log
-    networks:
-      - app
-    ports:
-      - "5000:5000"
-      - "5001:5001"
-    depends_on:
-      - database
-      - rabbitmq
-    environment:
-      ASPNETCORE_URLS: https://+:5001;http://+:5000
+    api_core:
+        container_name: articlib-core
+        image: articlib/core:local
+        build:
+            context: ../
+            dockerfile: Core/Source/Articlib.Core.Api/articlib-core.dockerfile
+        volumes:
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/log:/var/log
+        networks:
+            - app
+        ports:
+            - "5000:5000"
+            - "5001:5001"
+        depends_on:
+            - database
+            - rabbitmq
+        environment:
+            ASPNETCORE_URLS: https://+:5001;http://+:5000
 
-  api_notifications:
-    container_name: articlib-notifications
-    image: articlib/notifications:local
-    build:
-      context: ../
-      dockerfile: Notifications/Source/Articlib.Notifications.Api/articlib-notifications.dockerfile
-    volumes:
-      - ../../.temp/articlib-notiications/log:/var/log
-    networks:
-      - app
-    ports:
-      - "5002:5002"
-      - "5003:5003"
-    depends_on:
-      - database
-    environment:
+    api_notifications:
+        container_name: articlib-notifications
+        image: articlib/notifications:local
+        build:
+            context: ../
+            dockerfile: Notifications/Source/Articlib.Notifications.Api/articlib-notifications.dockerfile
+        volumes:
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/log:/var/log
+        networks:
+            - app
+        ports:
+            - "5002:5002"
+            - "5003:5003"
+        depends_on:
+            - database
+        environment:
       ASPNETCORE_URLS: https://+:5003;http://+:5002
-
-  api_users:
-    container_name: articlib-users
-    image: articlib/users:local
-    build:
-      context: ../
-      dockerfile: Users/Source/Articlib.Users.Api/articlib-users.dockerfile
-    volumes:
-      - ../../.temp/articlib-notiications/log:/var/log
-    networks:
-      - app
-    ports:
-      - "5004:5004"
-      - "5005:5005"
-    depends_on:
-      - database
-      - rabbitmq
-    environment:
-      ASPNETCORE_URLS: https://+:5005;http://+:5004
-
 
   database:
     command: --default-authentication-plugin=caching_sha2_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
     container_name: articlib-mysql
     image: mysql:latest
     networks:
-      - app
-    ports:
-      - "33060:3306"
-    volumes:
-      - ./services/mysql/:/docker-entrypoint-initdb.d/
-      - ../../.temp/mysql/var/data/:/var/data/mysql/
+            - app
+        ports:
+            - "33060:3306"
+        volumes:
+            - ./services/mysql:/docker-entrypoint-initdb.d
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/data/mysql:/var/data/mysql
 
-  loki:
-    command: --config.file=/etc/loki/local-config.yaml
-    container_name: articlib-loki
-    image: grafana/loki:2.3.0
-    networks:
-      - logs
-    ports:
-      - "3100:3100"
-    volumes:
-      - ../../.temp/loki/log:/var/log
+    loki:
+        command: --config.file=/etc/loki/local-config.yaml
+        container_name: articlib-loki
+        image: grafana/loki:2.3.0
+        networks:
+            - logs
+        ports:
+            - "3100:3100"
+        volumes:
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/log:/var/log
 
-  promtail:
-    command: --config.file=/etc/promtail/config.yml
-    container_name: articlib-promtail
-    depends_on:
-      - loki
-    image: grafana/promtail:2.3.0
-    networks:
-      - logs
-    volumes:
-      - ../../.temp/promtail/log:/var/log
+    promtail:
+        command: --config.file=/etc/promtail/config.yml
+        container_name: articlib-promtail
+        depends_on:
+            - loki
+        image: grafana/promtail:2.3.0
+        networks:
+            - logs
+        volumes:
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/log:/var/log
+            - ./services/promtail/config.yml:/etc/promtail/config.yml
 
-  grafana:
-    container_name: articlib-grafana
-    image: grafana/grafana:latest
-    ports:
-      - "3000:3000"
-    networks:
-      - logs
-    depends_on:
-      - loki
-      - prometheus
-    volumes:
-      - ../../.temp/grafana/log:/var/log
-      - ./services/grafana/:/etc/grafana/provisioning/datasources/
+    grafana:
+        container_name: articlib-grafana
+        image: grafana/grafana:latest
+        ports:
+            - "3000:3000"
+        networks:
+            - logs
+        depends_on:
+            - loki
+            - prometheus
+        volumes:
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/log:/var/log
+            - ./services/grafana:/etc/grafana/provisioning/datasources
 
-  prometheus:
-    command: --config.file=/etc/prometheus/prometheus.yml
-    container_name: articlib-prometheus
-    image: prom/prometheus:latest
-    networks:
-      - app
-    ports:
-      - "9090:9090"
-    volumes:
-      - ../../.temp/prometheus/log:/var/log
-      - ./services/prometheus/config.yml:/etc/prometheus/prometheus.yml
+    prometheus:
+        command: --config.file=/etc/prometheus/prometheus.yml
+        container_name: articlib-prometheus
+        image: prom/prometheus:latest
+        networks:
+            - app
+        ports:
+            - "9090:9090"
+        volumes:
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/log:/var/log
+            - ./services/prometheus/config.yml:/etc/prometheus/prometheus.yml
 
-  rabbitmq:
-    container_name: articlib-rabbitmq
-    environment:
-      RABBITMQ_DATA_DIR: /var/lib/rabbitmq/data/
-      RABBITMQ_LOGS: /var/lib/rabbitmq/log
-    image: rabbitmq:management
-    networks:
-      - app
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    volumes:
-      - ../../.temp/rabbitmq/data:/var/lib/rabbitmq/data/
-      - ../../.temp/rabbitmq/log:/var/lib/rabbitmq
-      - ./services/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+    rabbitmq:
+        container_name: articlib-rabbitmq
+        environment:
+            RABBITMQ_DATA_DIR: /var/lib/rabbitmq/data/
+            RABBITMQ_LOGS: /var/lib/rabbitmq/log
+        image: rabbitmq:management
+        networks:
+            - app
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        volumes:
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/data/rabbitmq:/var/lib/rabbitmq/data
+            - ${ARTICLIB_SOLUTION_DIRECTORY}/temp/log:/var/log
+            - ./services/rabbitmq/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+
+    unleash:
+        container_name: articlib-unleash
+        depends_on:
+            - postgres
+        environment:
+            DATABASE_HOST: postgres
+            DATABASE_NAME: unleash
+            DATABASE_USERNAME: dev
+            DATABASE_PASSWORD: pass
+            DATABASE_SSL: "false"
+            INIT_ADMIN_API_TOKENS: "*:*.dnavuriauvkbae"
+        image: unleashorg/unleash-server
+        networks:
+            - app
+        ports:
+            - "4242:4242"
+
+    postgres:
+        container_name: articlib-postgres
+        environment:
+            POSTGRES_PASSWORD: pass
+            POSTGRES_USER: dev
+            POSTGRES_DB: unleash
+        image: postgres
+        networks:
+            - app

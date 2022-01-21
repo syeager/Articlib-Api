@@ -1,5 +1,5 @@
 ﻿<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="articlib-lite-debug" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
+  <configuration default="false" name="core" type="docker-deploy" factoryName="docker-compose.yml" server-name="Docker">
     <deployment type="docker-compose.yml">
       <settings>
         <option name="envFilePath" value="" />
@@ -11,11 +11,7 @@
         </option>
         <option name="services">
           <list>
-            <option value="api_articles" />
-            <option value="api_notifications" />
-            <option value="api_users" />
-            <option value="database" />
-            <option value="rabbitmq" />
+            <option value="api_core" />
           </list>
         </option>
         <option name="sourceFilePath" value="docker/docker-compose.yml" />

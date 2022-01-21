@@ -4,7 +4,7 @@
         <LangVersion>10.0</LangVersion>
         <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
         <Configurations>Debug;Release</Configurations>
-        <Platforms>ARM64</Platforms>
+        <Platforms>ARM64;AnyCPU</Platforms>
     </PropertyGroup>
 
     <PropertyGroup>

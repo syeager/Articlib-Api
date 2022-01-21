@@ -1,6 +1,6 @@
 $DEV_PASSWORD = "dev-pass"
 
-$services = "Articles", "Notifications", "Users"
+$services = "Core", "Notifications"
 
 foreach ($service in $services) {
     Invoke-Expression -Command "dotnet dev-certs https -ep $env:USERPROFILE\.aspnet\https\Articlib.$service.Api.pfx -p $DEV_PASSWORD"

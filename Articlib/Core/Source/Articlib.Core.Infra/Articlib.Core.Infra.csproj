@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>Articlib.Core.Infra.Test</_Parameter1>
+        </AssemblyAttribute>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>DynamicProxyGenAssembly2</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Extensions.Pomelo.EntityFrameworkCore.MySql\LittleByte.Extensions.Pomelo.EntityFrameworkCore.MySql.csproj" />
+        <ProjectReference Include="..\Articlib.Core.Domain\Articlib.Core.Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Configuration\LittleByte.Configuration.csproj" />
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Core\LittleByte.Core.csproj" />
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Logging\LittleByte.Logging.csproj" />
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Infra\LittleByte.Infra.csproj" />
+        <ProjectReference Include="..\..\..\Common-DotNet\LittleByte.Messaging\LittleByte.Messaging.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+        <PackageReference Include="AutoMapperBuilder" Version="1.1.0" />
+        <PackageReference Update="JetBrains.Annotations" Version="2021.3.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Build.Utilities.Core" Version="17.0.0" />
+        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
+        <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
+    </ItemGroup>
+</Project>

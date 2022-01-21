@@ -1,0 +1,22 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "None",
+      "composeLaunchServiceName": "api_core",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "api_core": "StartDebugging",
+        "api_notifications": "StartDebugging",
+        "database": "StartWithoutDebugging",
+        "grafana": "StartWithoutDebugging",
+        "loki": "StartWithoutDebugging",
+        "prometheus": "StartWithoutDebugging",
+        "promtail": "StartWithoutDebugging",
+        "rabbitmq": "StartWithoutDebugging",
+        "postgres": "StartWithoutDebugging",
+        "unleash": "StartWithoutDebugging"
+      }
+    }
+  }
+}
