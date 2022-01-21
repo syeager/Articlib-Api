@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Articlib.Core.Domain;
+using Articlib.Articles.Domain.Articles;
 using AutoMapper;
 using LittleByte.Core.Exceptions;
 using LittleByte.Extensions.AspNet.Responses;

@@ -1,4 +1,4 @@
-﻿using Articlib.Core.Domain;
+﻿using Articlib.Articles.Domain.Articles;
 using AutoMapper;
 
 namespace Articlib.Articles.Api;

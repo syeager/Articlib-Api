@@ -2,7 +2,7 @@
 using LittleByte.Validation;
 using LittleByte.Validation.Validators;
 
-namespace Articlib.Core.Domain;
+namespace Articlib.Articles.Domain.Articles;
 
 public class ArticleValidator : ModelValidator<Article>
 {

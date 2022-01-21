@@ -1,8 +1,9 @@
-﻿using Articlib.Core.Domain;
+﻿using Articlib.Articles.Domain.Articles;
+using Articlib.Articles.Infra.Persistence.Daos;
 using AutoMapper;
 using LittleByte.Validation;
 
-namespace Articlib.Core.Infra;
+namespace Articlib.Articles.Infra.Persistence;
 
 internal sealed class AddArticleCommand : IAddArticleCommand
 {

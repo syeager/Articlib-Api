@@ -1,21 +1,21 @@
-﻿using Articlib.Core.Domain;
+﻿using Articlib.Articles.Domain.Articles;
 using AutoMapper;
 using LittleByte.Infra.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Articlib.Core.Infra;
+namespace Articlib.Articles.Infra.Persistence.Queries;
 
-public interface IArticleFilterRepo
+public interface IFilterArticlesQuery
 {
     public Task<PageResponse<Article>> FilterAsync(PageRequest request);
 }
 
-internal class ArticleFilterRepo : IArticleFilterRepo
+internal class FilterQuery : IFilterArticlesQuery
 {
     private readonly ArticlesContext dbContext;
     private readonly IMapper mapper;
 
-    public ArticleFilterRepo(ArticlesContext dbContext, IMapper mapper)
+    public FilterQuery(ArticlesContext dbContext, IMapper mapper)
     {
         this.dbContext = dbContext;
         this.mapper = mapper;

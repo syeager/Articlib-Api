@@ -1,5 +1,5 @@
 ﻿using System.Net;
-using Articlib.Core.Infra;
+using Articlib.Articles.Infra.Persistence.Queries;
 using AutoMapper;
 using LittleByte.Extensions.AspNet.Responses;
 using LittleByte.Infra.Models;
@@ -9,12 +9,12 @@ namespace Articlib.Articles.Api;
 
 public sealed class FilterArticlesController : ArticleController
 {
-    private readonly IArticleFilterRepo articleRepo;
+    private readonly IFilterArticlesQuery articlesQuery;
     private readonly IMapper mapper;
 
-    public FilterArticlesController(IArticleFilterRepo articleRepo, IMapper mapper)
+    public FilterArticlesController(IFilterArticlesQuery articlesQuery, IMapper mapper)
     {
-        this.articleRepo = articleRepo;
+        this.articlesQuery = articlesQuery;
         this.mapper = mapper;
     }
 
@@ -22,7 +22,7 @@ public sealed class FilterArticlesController : ArticleController
     [ResponseType(HttpStatusCode.OK, typeof(PageResponse<ArticleDto>))]
     public async Task<ApiResponse<PageResponse<ArticleDto>>> Filter([FromQuery] PageRequest request)
     {
-        var articles = await articleRepo.FilterAsync(request);
+        var articles = await articlesQuery.FilterAsync(request);
         var dtos = articles.CastResults(mapper.Map<ArticleDto>);
         return new OkResponse<PageResponse<ArticleDto>>(dtos);
     }

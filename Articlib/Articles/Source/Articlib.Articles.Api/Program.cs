@@ -1,4 +1,5 @@
 using Articlib.Articles.Api;
+using LittleByte.Core.Dates;
 using LittleByte.Extensions.AspNet;
 using LittleByte.Extensions.AspNet.Middleware;
 using LittleByte.Logging.Configuration;
@@ -9,13 +10,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.UseSerilog();
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApiDocument(options =>
-{
-    options.Title = "Articlib - Core";
-    options.DocumentName = "core";
-});
+builder.Services.AddOpenApi("Articles");
 
 builder.Services
+    .AddTransient<IDateService, DateService>()
     .AddArticles(builder.Configuration)
     .AddAutoMapper()
     .AddMessaging(builder.Configuration)
@@ -37,9 +35,9 @@ else
 
 app
     .UseHttpsRedirection()
-    //.UseAuthentication()
+    .UseAuthentication()
     .UseRouting()
-    //.UseAuthorization()
+    .UseAuthorization()
     .UseHttpMetrics()
     .UseHttpExceptions()
     .UseModelValidationExceptions()
@@ -48,7 +46,6 @@ app
         endpoints.MapControllers();
         endpoints.MapMetrics();
     })
-    .UseOpenApi()
-    .UseSwaggerUi3();
+    .UseOpenApi();
 
 app.Run();

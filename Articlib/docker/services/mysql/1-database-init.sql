@@ -1,0 +1,3 @@
+CREATE DATABASE Articlib CHARACTER SET utf8mb4;
+
+GRANT ALL PRIVILEGES ON Articlib.* TO 'dev'@'%';

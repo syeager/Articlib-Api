@@ -1,7 +1,3 @@
-CREATE DATABASE Articlib CHARACTER SET utf8mb4;
-
-GRANT ALL PRIVILEGES ON Articlib.* TO 'dev'@'%';
-
 create table Articlib.AspNetUsers
 (
     Id                   char(36)   not null
@@ -23,16 +19,4 @@ create table Articlib.AspNetUsers
     TwoFactorEnabled     tinyint(1)   null,
     constraint AspNetUsers_Id_uindex
         unique (Id)
-);
-
-create table Articlib.Articles
-(
-    Id       char(36)      not null,
-    Url      varchar(2083) not null,
-    PosterId char(36)    not null
-        collate ascii_general_ci,
-    constraint Articles_pk
-        primary key (Id),
-    constraint Articles_AspNetUsers_Id_fk
-        foreign key (PosterId) references Articlib.AspNetUsers (Id)
 );

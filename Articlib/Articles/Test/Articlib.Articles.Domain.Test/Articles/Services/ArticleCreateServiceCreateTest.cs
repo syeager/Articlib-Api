@@ -1,10 +1,11 @@
-﻿using LittleByte.Validation;
+﻿using Articlib.Articles.Domain.Articles;
+using LittleByte.Validation;
 using LittleByte.Validation.Test;
 using LittleByte.Validation.Test.TestUtilities;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace Articlib.Core.Domain.Test;
+namespace Articlib.Articles.Domain.Test.Articles;
 
 public class ArticleCreateServiceCreateTest : UnitTest
 {

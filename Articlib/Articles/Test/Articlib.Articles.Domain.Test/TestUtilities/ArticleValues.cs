@@ -1,7 +1,8 @@
-﻿using LittleByte.Domain;
+﻿using Articlib.Articles.Domain.Articles;
+using LittleByte.Domain;
 using LittleByte.Validation;
 
-namespace Articlib.Core.Domain.Test;
+namespace Articlib.Articles.Domain.Test;
 
 internal static partial class TV
 {

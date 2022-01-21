@@ -1,11 +1,13 @@
-﻿using LittleByte.Core.Common;
+﻿using Articlib.Articles.Domain.Articles;
+using Articlib.Articles.Domain.Users;
+using LittleByte.Core.Common;
 using LittleByte.Domain;
 using LittleByte.Validation.Test;
 using LittleByte.Validation.Test.TestUtilities;
 using LittleByte.Validation.Validators;
 using NUnit.Framework;
 
-namespace Articlib.Core.Domain.Test;
+namespace Articlib.Articles.Domain.Test.Articles;
 
 public class ArticleValidatorSignTest : UnitTest
 {

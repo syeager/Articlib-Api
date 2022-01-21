@@ -39,7 +39,6 @@ services:
       - "5003:5003"
     depends_on:
       - database
-      - rabbitmq
     environment:
       ASPNETCORE_URLS: https://+:5003;http://+:5002
 

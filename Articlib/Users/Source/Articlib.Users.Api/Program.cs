@@ -5,34 +5,15 @@ using LittleByte.Extensions.AspNet.Middleware;
 using LittleByte.Identity.Configuration;
 using LittleByte.Logging.Configuration;
 using LittleByte.Messaging.Configuration;
-using NSwag;
-using NSwag.Generation.Processors.Security;
 using Prometheus;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.UseSerilog();
 
 builder.Services.AddControllers();
-builder.Services.AddOpenApiDocument(options =>
-{
-    options.Title = "Articlib - Users";
-    options.DocumentName = "users";
-    // TODO: Move to common
-    options.OperationProcessors.Add(new OperationSecurityScopeProcessor("auth"));
-    options.DocumentProcessors.Add(new SecurityDefinitionAppender(
-        "auth",
-        new OpenApiSecurityScheme
-        {
-            Type = OpenApiSecuritySchemeType.ApiKey,
-            Name = "Authorization",
-            Description = "Copy 'Bearer ' + valid JWT token into field",
-            In = OpenApiSecurityApiKeyLocation.Header,
-            BearerFormat = "jwt",
-            Scheme = "bearer"
-        }));
-});
 
 builder.Services
+    .AddOpenApi("Users")
     .AddUsers(builder.Configuration)
     .AddAutoMapper()
     .AddMessaging(builder.Configuration)
@@ -68,7 +49,6 @@ app
         endpoints.MapControllers();
         endpoints.MapMetrics();
     })
-    .UseOpenApi()
-    .UseSwaggerUi3();
+    .UseOpenApi();
 
 app.Run();

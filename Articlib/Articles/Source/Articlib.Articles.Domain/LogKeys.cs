@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using LittleByte.Logging;
 
-namespace Articlib.Core.Domain;
+namespace Articlib.Articles.Domain;
 
 [ExcludeFromCodeCoverage]
 [SuppressMessage("ReSharper", "InconsistentNaming")]

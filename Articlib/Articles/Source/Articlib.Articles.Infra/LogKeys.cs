@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Articlib.Core.Infra;
+namespace Articlib.Articles.Infra;
 
 [SuppressMessage("ReSharper", "MemberHidesStaticFromOuterClass")]
 public static class LogKeys

@@ -10,7 +10,7 @@ public static class AutoMapperConfiguration
             .AddScoped(_ => new MapperConfiguration(config =>
                 {
                     config.AddProfile<ArticleProfile>();
-                    config.AddProfile<Core.Infra.ArticleProfile>();
+                    config.AddProfile<Infra.Persistence.ArticleProfile>();
                 })
                 .CreateMapper());
     }

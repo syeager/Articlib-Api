@@ -1,9 +1,11 @@
-﻿using LittleByte.Domain;
+﻿using Articlib.Articles.Domain.Articles;
+using Articlib.Articles.Domain.Users;
+using LittleByte.Domain;
 using LittleByte.Validation;
 using LittleByte.Validation.Test;
 using NUnit.Framework;
 
-namespace Articlib.Core.Domain.Test;
+namespace Articlib.Articles.Domain.Test.Articles;
 
 public class ArticleCreateTest : UnitTest
 {

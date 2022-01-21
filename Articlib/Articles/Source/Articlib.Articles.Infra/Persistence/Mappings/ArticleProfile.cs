@@ -1,7 +1,9 @@
-﻿using Articlib.Core.Domain;
+﻿using Articlib.Articles.Domain.Articles;
+using Articlib.Articles.Domain.Votes.Models;
+using Articlib.Articles.Infra.Persistence.Daos;
 using AutoMapper;
 
-namespace Articlib.Core.Infra;
+namespace Articlib.Articles.Infra.Persistence;
 
 public class ArticleProfile : Profile
 {
@@ -11,6 +13,7 @@ public class ArticleProfile : Profile
         CreateMap<string, Uri>().ConvertUsing(s => new Uri(s));
 
         CreateMap<Article, ArticleDao>();
-        CreateMap<ArticleDao, Article>();
+        CreateMap<VoteDao, Vote>();
+        CreateMap<Vote, VoteDao>();
     }
 }

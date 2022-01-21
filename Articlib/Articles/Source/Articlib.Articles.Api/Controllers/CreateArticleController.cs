@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Articlib.Articles.Api.Messages;
 using Articlib.Articles.Api.Requests;
-using Articlib.Core.Domain;
+using Articlib.Articles.Domain.Articles;
 using AutoMapper;
 using LittleByte.Extensions.AspNet.Responses;
 using LittleByte.Infra.Commands;

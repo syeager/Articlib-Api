@@ -1,6 +1,6 @@
 ﻿using LittleByte.Infra.Models;
 
-namespace Articlib.Core.Infra;
+namespace Articlib.Articles.Infra.Persistence.Daos;
 
 internal class ArticleDao : Entity
 {

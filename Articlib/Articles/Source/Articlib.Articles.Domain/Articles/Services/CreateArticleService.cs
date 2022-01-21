@@ -2,7 +2,7 @@
 using LittleByte.Validation;
 using Serilog;
 
-namespace Articlib.Core.Domain;
+namespace Articlib.Articles.Domain.Articles;
 
 public interface IArticleCreateService
 {
