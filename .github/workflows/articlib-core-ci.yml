@@ -7,12 +7,14 @@ on:
   pull_request:
     branches-ignore:
       - "private/**"
+      
+env:
+  version: 1.0.0-${{GITHUB_RUN_NUMBER}}
 
 jobs:
   build-deploy:
     env:
-      version: 1.0.0-${{GITHUB_RUN_NUMBER}}
-      packageName: articlib-core:ci-${{env.version}}
+      packageName: articlib.jfrog.io/dev-docker-local/debug/core:ci-${{env.version}}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
