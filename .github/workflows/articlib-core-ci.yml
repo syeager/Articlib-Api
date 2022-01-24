@@ -10,11 +10,10 @@ on:
       
 env:
   version: 1.0.0-$GITHUB_RUN_NUMBER
+  packageName: articlib.jfrog.io/dev-docker-local/debug/core:ci-$ENV_VERSION
 
 jobs:
   build-deploy:
-    env:
-      packageName: articlib.jfrog.io/dev-docker-local/debug/core:ci-$ENV_VERSION
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
@@ -27,7 +26,7 @@ jobs:
         run: >
           docker build ./Articlib
           -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile
-          -t ${{packageName}}
+          -t $PACKAGENAME
           -l articlib.environment=dev articlib.configuration=debug articlib.branch=${{GITHUB_REF_NAME}}
           articlib.commit=${{GITHUB_SHA}} articlib.workflow=${{GITHUB_WORKFLOW}} articlib.version=${{version}}
       - name: docker-login
