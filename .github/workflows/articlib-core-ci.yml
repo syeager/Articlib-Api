@@ -9,18 +9,27 @@ on:
       - "private/**"
 
 jobs:
-  build:
+  build-deploy:
+    env:
+      version: 1.0.0-${{GITHUB_RUN_NUMBER}}
+      packageName: articlib-core:ci-${{env.version}}
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout source
         uses: actions/checkout@v2
         with:
           submodules: recursive
-
-      - name: Test
-        if: ${{ false }}
+      - name: test
         run: docker build ./Articlib -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile --target test
-
-      - name: Build
-        run: docker build ./Articlib -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile --tag articlib-core:ci-$(date +%s)
+      - name: build
+        run: >
+          docker build ./Articlib
+          -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile
+          -t ${{packageName}}
+          -l articlib.environment=dev articlib.configuration=debug articlib.branch=${{GITHUB_REF_NAME}}
+          articlib.commit=${{GITHUB_SHA}} articlib.workflow=${{GITHUB_WORKFLOW}} articlib.version=${{version}}
+      - name: docker-login
+        run: docker login articlib.jfrog.io -u service-github -p ${{secrets.ARTIFACTORY_TOKEN}}
+      - name: docker-push
+        run: docker push ${{packageName}}
+      
