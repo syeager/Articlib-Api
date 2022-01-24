@@ -32,5 +32,5 @@ jobs:
       - name: docker-login
         run: docker login articlib.jfrog.io -u service-github -p ${{secrets.ARTIFACTORY_TOKEN}}
       - name: docker-push
-        run: docker push ${{packageName}}
+        run: docker push $PACKAGENAME
       
