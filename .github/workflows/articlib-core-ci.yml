@@ -7,20 +7,34 @@ on:
   pull_request:
     branches-ignore:
       - "private/**"
-
+      
 jobs:
-  build:
+  build-deploy:
     runs-on: ubuntu-latest
-
     steps:
+      - name: env-version
+        run: echo "VERSION=1.0.0-$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+      - name: env-package_name
+        run: echo "PACKAGE_NAME=articlib.jfrog.io/dev-docker-local/debug/core:ci-$VERSION" >> $GITHUB_ENV
       - name: Checkout source
         uses: actions/checkout@v2
         with:
           submodules: recursive
-
-      - name: Test
-        if: ${{ false }}
+      - name: test
         run: docker build ./Articlib -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile --target test
-
-      - name: Build
-        run: docker build ./Articlib -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile --tag articlib-core:ci-$(date +%s)
+      - name: build
+        run: >
+          docker build ./Articlib
+          -f ./Articlib/Core/Source/Articlib.Core.Api/articlib-core.dockerfile
+          -t $PACKAGE_NAME
+          --label articlib.branch=$GITHUB_REF_NAME
+          --label articlib.commit=$GITHUB_SHA
+          --label articlib.configuration=debug
+          --label articlib.environment=dev
+          --label articlib.version=$VERSION
+          --label articlib.workflow=$GITHUB_WORKFLOW
+      - name: docker-login
+        run: docker login articlib.jfrog.io -u service-github -p ${{secrets.ARTIFACTORY_TOKEN}}
+      - name: docker-push
+        run: docker push $PACKAGE_NAME
+      
