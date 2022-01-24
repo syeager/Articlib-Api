@@ -9,12 +9,12 @@ on:
       - "private/**"
       
 env:
-  version: 1.0.0-${{GITHUB_RUN_NUMBER}}
+  version: 1.0.0-$GITHUB_RUN_NUMBER
 
 jobs:
   build-deploy:
     env:
-      packageName: articlib.jfrog.io/dev-docker-local/debug/core:ci-${{env.version}}
+      packageName: articlib.jfrog.io/dev-docker-local/debug/core:ci-$ENV_VERSION
     runs-on: ubuntu-latest
     steps:
       - name: Checkout source
