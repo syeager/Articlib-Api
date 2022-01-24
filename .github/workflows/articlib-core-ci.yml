@@ -15,7 +15,7 @@ jobs:
       - name: setup-variables
         run: > 
           echo "VERSION=1.0.0-$GITHUB_RUN_NUMBER" >> $GITHUB_ENV &&
-          echo "PACKAGE_NAME=articlib.jfrog.io/dev-docker-local/debug/core:ci-$VERSION" >> $GITHUB_ENV
+          echo "PACKAGE_NAME=articlib.jfrog.io/dev-docker-local/debug/core:ci-$ENV_VERSION" >> $GITHUB_ENV
       - name: Checkout source
         uses: actions/checkout@v2
         with:
