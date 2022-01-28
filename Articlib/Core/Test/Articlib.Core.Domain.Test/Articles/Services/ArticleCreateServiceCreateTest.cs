@@ -1,4 +1,5 @@
-﻿using Articlib.Core.Domain.Articles;
+using Articlib.Core.Domain.Articles;
+using LittleByte.Core.Dates;
 using LittleByte.Validation;
 using LittleByte.Validation.Test.Categories;
 using LittleByte.Validation.Test.TestUtilities;
@@ -18,8 +19,9 @@ public class ArticleCreateServiceCreateTest : UnitTest
     {
         validator = Substitute.For<IModelValidator<Article>>();
         command = Substitute.For<IAddArticleCommand>();
+        var dateService = Substitute.For<IDateService>();
 
-        testObj = new ArticleCreateService(validator, command);
+        testObj = new ArticleCreateService(validator, command, dateService);
 
         validator.Sign(null!).ReturnsForAnyArgs(ValidModel.Succeeded<Article>());
     }

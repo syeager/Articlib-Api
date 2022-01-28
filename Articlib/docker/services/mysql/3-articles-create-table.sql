@@ -6,6 +6,7 @@ create table Articlib.Articles
     PosterId  char(36)      not null
         collate ascii_general_ci,
     VoteCount int unsigned  not null,
+    PostedDate datetime not null,
     constraint Articles_pk
         primary key (Id),
     constraint Articles_AspNetUsers_Id_fk

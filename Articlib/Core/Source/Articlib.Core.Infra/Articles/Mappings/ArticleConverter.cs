@@ -22,7 +22,8 @@ internal sealed class ArticleConverter : ITypeConverter<ArticleDao, Article>
             validator,
             source.Id,
             new Uri(source.Url),
-            source.PosterId);
+            source.PosterId,
+            source.PostedDate);
         return article.GetModelOrThrow();
     }
 }
