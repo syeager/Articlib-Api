@@ -40,14 +40,14 @@ services:
         depends_on:
             - database
         environment:
-      ASPNETCORE_URLS: https://+:5003;http://+:5002
+            ASPNETCORE_URLS: https://+:5003;http://+:5002
 
-  database:
-    command: --default-authentication-plugin=caching_sha2_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    container_name: articlib-mysql
-    image: mysql:latest
-    networks:
-            - app
+    database:
+        command: --default-authentication-plugin=caching_sha2_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+        container_name: articlib-mysql
+        image: mysql:latest
+        networks:
+                - app
         ports:
             - "33060:3306"
         volumes:
