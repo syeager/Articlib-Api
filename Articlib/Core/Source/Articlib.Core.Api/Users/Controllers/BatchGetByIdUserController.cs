@@ -19,11 +19,11 @@ public sealed class BatchGetByIdUserController : UserController
     }
 
     [HttpPost(Routes.FindByIdBatch)]
-    [ResponseType(HttpStatusCode.OK, typeof(UserDto[]))]
-    public async Task<ApiResponse<UserDto[]>> Get(Guid[] ids)
+    [ResponseType(HttpStatusCode.OK, typeof(List<UserDto>))]
+    public async Task<ApiResponse<List<UserDto>>> Get(Guid[] ids)
     {
         var users = await query.SendAsync(ids);
-        var dtos = mapper.MapRange<UserDto>(users);
-        return new OkResponse<UserDto[]>(dtos);
+        var dtos = mapper.MapRange<UserDto>(users).ToList();
+        return new OkResponse<List<UserDto>>(dtos);
     }
 }
