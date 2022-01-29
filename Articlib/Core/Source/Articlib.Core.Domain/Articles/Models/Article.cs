@@ -11,12 +11,13 @@ public sealed class Article
     public uint VoteCount { get; private set; }
     public DateTime PostedDate { get; } // TODO: validate not in the future
 
-    private Article(Id<Article> id, Uri url, Id<User> posterId, DateTime postedDate)
+    private Article(Id<Article> id, Uri url, Id<User> posterId, DateTime postedDate, uint voteCount)
     {
         Id = id;
         Url = url;
         PosterId = posterId;
         PostedDate = postedDate;
+        VoteCount = voteCount;
     }
 
     public static Valid<Article> Create(
@@ -24,9 +25,10 @@ public sealed class Article
         Id<Article> id,
         Uri url,
         Id<User> posterId,
-        DateTime postedDate)
+        DateTime postedDate,
+        uint voteCount)
     {
-        var article = new Article(id, url, posterId, postedDate);
+        var article = new Article(id, url, posterId, postedDate, voteCount);
         var validArticle = articleValidator.Sign(article);
         return validArticle;
     }

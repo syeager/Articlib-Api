@@ -36,7 +36,7 @@ public class ArticleCreateService : IArticleCreateService
         using(logger.BeginTimedOperation("Create article"))
         {
             var now = dateService.UtcNow;
-            article = Article.Create(validator, id, url, posterId, now);
+            article = Article.Create(validator, id, url, posterId, now, 0);
         }
 
         if(article.IsSuccess)
