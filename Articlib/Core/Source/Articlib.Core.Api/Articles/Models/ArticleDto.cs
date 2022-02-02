@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 using LittleByte.Extensions.AspNet.Core;
 
 namespace Articlib.Core.Api.Articles;
@@ -11,7 +11,10 @@ public class ArticleDto : Dto
 
     [Required]
     public Guid PosterId { get; init; }
-    
+
     [Required]
     public uint VoteCount { get; init; }
+
+    [Required]
+    public DateTime PostedDate { get; init; }
 }
