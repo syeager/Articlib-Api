@@ -1,4 +1,4 @@
-﻿using Articlib.Core.Domain.Articles;
+using Articlib.Core.Domain.Articles;
 using Articlib.Core.Domain.Votes.Services;
 using LittleByte.Validation;
 
@@ -11,6 +11,6 @@ internal static class ArticleConfiguration
         return @this
             .AddTransient<IAddVote, AddVote>()
             .AddTransient<IModelValidator<Article>, ArticleValidator>()
-            .AddTransient<IArticleCreateService, ArticleCreateService>();
+            .AddTransient<IPostArticleService, PostArticleService>();
     }
 }

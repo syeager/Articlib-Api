@@ -1,6 +1,4 @@
 using Articlib.Core.Domain.Articles;
-using Articlib.Core.Domain.Users;
-using LittleByte.Domain;
 using LittleByte.Validation;
 using LittleByte.Validation.Test.Categories;
 using NUnit.Framework;
@@ -15,7 +13,7 @@ public class ArticleCreateTest : UnitTest
     [Test]
     public void When_ValidationPasses_Then_ReturnModel()
     {
-        var result = Article.Create(passValidator, TV.Articles.Id(), TV.Articles.Url, Id<User>.Empty, DateTime.UtcNow, 0);
+        var result = Article.Create(passValidator, TV.Articles.Id(), TV.Articles.Url, 0);
 
         Assert.IsTrue(result.IsSuccess);
     }
@@ -23,7 +21,7 @@ public class ArticleCreateTest : UnitTest
     [Test]
     public void When_ValidationFails_Then_DontThrow()
     {
-        var result = Article.Create(failValidator, TV.Articles.Id(), null!, TV.Users.Id(), DateTime.UtcNow, 0);
+        var result = Article.Create(failValidator, TV.Articles.Id(), null!, 0);
 
         Assert.IsFalse(result.IsSuccess);
     }
