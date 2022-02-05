@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Articlib.Core.Domain.Articles;
 using AutoMapper;
 using LittleByte.Extensions.AspNet.Responses;
@@ -12,7 +12,7 @@ namespace Articlib.Core.Api.Articles;
 [Authorize]
 public sealed class CreateArticleController : ArticleController
 {
-    private readonly IArticleCreateService articleCreateService;
+    private readonly IPostArticleService postArticleService;
     private readonly IMapper mapper;
     private readonly MessagePublisher messagePublisher;
     private readonly ISaveContextCommand saveContextCommand;
@@ -20,12 +20,12 @@ public sealed class CreateArticleController : ArticleController
     public CreateArticleController(
         ISaveContextCommand saveContextCommand,
         IMapper mapper,
-        IArticleCreateService articleCreateService,
+        IPostArticleService postArticleService,
         MessagePublisher messagePublisher)
     {
         this.saveContextCommand = saveContextCommand;
         this.mapper = mapper;
-        this.articleCreateService = articleCreateService;
+        this.postArticleService = postArticleService;
         this.messagePublisher = messagePublisher;
     }
 
@@ -34,7 +34,7 @@ public sealed class CreateArticleController : ArticleController
     [ResponseType(HttpStatusCode.Created, typeof(ArticleDto))]
     public async Task<ApiResponse<ArticleDto>> Create(ArticleCreateRequest request)
     {
-        var validArticle = articleCreateService.Create(new Uri(request.Url), request.PosterId);
+        var validArticle = await postArticleService.FromUserAsync(request.PosterId, new Uri(request.Url));
         var article = validArticle.GetModelOrThrow();
         await saveContextCommand.CommitChangesAsync();
         var dto = mapper.Map<ArticleDto>(article);
