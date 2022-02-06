@@ -2,8 +2,8 @@ name: articlib-core-ci
 
 on:
   push:
-    branches-ignore:
-      - "private/**"
+    branches:
+      - "main"
 
 jobs:
   build-deploy:
