@@ -18,7 +18,3 @@ public class ArticleDto : Dto
     [Required]
     public DateTime PostedDate { get; init; }
 }
-
-    [Required]
-    public DateTime PostedDate { get; init; }
-}
