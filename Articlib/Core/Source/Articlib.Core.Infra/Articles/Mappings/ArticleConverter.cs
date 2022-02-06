@@ -7,7 +7,7 @@ using LittleByte.Validation;
 namespace Articlib.Core.Infra.Articles.Mappings;
 
 [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-internal sealed class ArticleConverter : ITypeConverter<ArticleDao, Article>
+internal sealed class ArticleConverter : ITypeConverter<ArticleDao, Valid<Article>>
 {
     private readonly IModelValidator<Article> validator;
 
@@ -16,13 +16,13 @@ internal sealed class ArticleConverter : ITypeConverter<ArticleDao, Article>
         this.validator = validator;
     }
 
-    public Article Convert(ArticleDao source, Article destination, ResolutionContext context)
+    public Valid<Article> Convert(ArticleDao source, Valid<Article> destination, ResolutionContext context)
     {
         var article = Article.Create(
             validator,
             source.Id,
             new Uri(source.Url),
             source.VoteCount);
-        return article.GetModelOrThrow();
+        return article;
     }
 }

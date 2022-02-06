@@ -1,3 +1,4 @@
+using Articlib.Core.Domain.Articles.Exceptions;
 using Articlib.Core.Domain.Articles.Queries;
 using Articlib.Core.Domain.Users;
 using LittleByte.Core.Dates;
@@ -59,15 +60,8 @@ public sealed class PostArticleService : IPostArticleService
             logger.Information("Posting new article");
 
             var newArticle = Article.Create(validator, id, url, 0);
-            if(newArticle.IsSuccess)
-            {
-                addArticleCommand.Add(newArticle);
-                article = newArticle;
-            }
-            else
-            {
-                throw new Exception(); // TODO
-            }
+            addArticleCommand.Add(newArticle);
+            article = newArticle;
         }
         else
         {
@@ -84,7 +78,7 @@ public sealed class PostArticleService : IPostArticleService
         var hasUserAlreadyPosted = await doesArticlePostExistQuery.SearchAsync(userId, article.Id);
         if(hasUserAlreadyPosted)
         {
-            throw new Exception();
+            throw new UserAlreadyPostedArticleException(userId, article.Id);
         }
 
         logger.Information("New article post");
