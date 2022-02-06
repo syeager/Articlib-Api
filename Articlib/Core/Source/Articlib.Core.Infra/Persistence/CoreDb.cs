@@ -1,4 +1,5 @@
-﻿using Articlib.Core.Infra.Articles.Models;
+using System.Diagnostics.CodeAnalysis;
+using Articlib.Core.Infra.Articles.Models;
 using Articlib.Core.Infra.Users.Entities;
 using Articlib.Core.Infra.Votes.Models;
 using AutoMapper;
@@ -7,12 +8,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Articlib.Core.Infra.Persistence;
 
+[SuppressMessage("ReSharper", "AutoPropertyCanBeMadeGetOnly.Global")]
 internal class CoreDb : DomainContext<CoreDb, UserDao, UserRole>
 {
-    [UsedImplicitly]
     public DbSet<ArticleDao> Articles { get; set; } = null!;
-
-    [UsedImplicitly]
+    public DbSet<ArticlePostDao> ArticlePosts { get; set; } = null!;
     public DbSet<VoteDao> Votes { get; set; } = null!;
 
     public CoreDb(IMapper mapper, DbContextOptions<CoreDb> options)
@@ -22,6 +22,7 @@ internal class CoreDb : DomainContext<CoreDb, UserDao, UserRole>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<VoteDao>().HasKey(k => new {k.ArticleId, k.UserId});
+        modelBuilder.Entity<VoteDao>().HasKey(v => new {v.ArticleId, v.UserId});
+        modelBuilder.Entity<ArticlePostDao>().HasKey(ap => new {ap.UserId, ap.ArticleId});
     }
 }
