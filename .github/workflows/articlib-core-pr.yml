@@ -1,7 +1,7 @@
-name: articlib-core-ci
+name: articlib-core-pr
 
 on:
-  push:
+  pull_request:
     branches-ignore:
       - "private/**"
 
@@ -30,8 +30,3 @@ jobs:
           --label articlib.environment=dev
           --label articlib.version=$VERSION
           --label articlib.workflow=$GITHUB_WORKFLOW
-      - name: docker-login
-        run: docker login articlib.jfrog.io -u service-github -p ${{secrets.ARTIFACTORY_TOKEN}}
-      - name: docker-push
-        run: docker push $PACKAGE_NAME
-      
