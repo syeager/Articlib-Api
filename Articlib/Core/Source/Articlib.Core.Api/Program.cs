@@ -31,8 +31,6 @@ builder.Services
     .AddJwtAuthentication(builder.Configuration)
     .AddFeatureFlags(builder.Configuration);
 
-builder.Services.AddSingleton<IUnleash>(services =>
-
 var app = builder.Build();
 app.UseSerilogRequestLogging();
 
