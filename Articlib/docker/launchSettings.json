@@ -17,6 +17,24 @@
         "postgres": "StartWithoutDebugging",
         "unleash": "StartWithoutDebugging"
       }
+    },
+    "core": {
+      "commandName": "DockerCompose",
+      "composeLaunchAction": "None",
+      "composeLaunchServiceName": "api_core",
+      "commandVersion": "1.0",
+      "serviceActions": {
+        "api_core": "StartDebugging",
+        "api_notifications": "DoNotStart",
+        "database": "StartWithoutDebugging",
+        "grafana": "DoNotStart",
+        "loki": "DoNotStart",
+        "postgres": "DoNotStart",
+        "prometheus": "DoNotStart",
+        "promtail": "DoNotStart",
+        "rabbitmq": "StartWithoutDebugging",
+        "unleash": "DoNotStart"
+      }
     }
   }
 }
