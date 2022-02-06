@@ -28,16 +28,10 @@ builder.Services
     .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies())
     .AddPersistence(builder.Configuration)
     .AddMessaging(builder.Configuration)
-    .AddJwtAuthentication(builder.Configuration);
+    .AddJwtAuthentication(builder.Configuration)
+    .AddFeatureFlags(builder.Configuration);
 
 builder.Services.AddSingleton<IUnleash>(services =>
-{
-    var configuration = services.GetRequiredService<IConfiguration>();
-    var options = configuration.GetValue<UnleashOptions>(nameof(UnleashOptions));
-    var unleashFactory = new UnleashClientFactory();
-    var unleash = unleashFactory.CreateClient(options, true);
-    return unleash;
-});
 
 var app = builder.Build();
 app.UseSerilogRequestLogging();
