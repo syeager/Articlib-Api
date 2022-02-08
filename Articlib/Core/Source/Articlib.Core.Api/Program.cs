@@ -10,8 +10,6 @@ using LittleByte.Identity.Configuration;
 using LittleByte.Logging.Configuration;
 using LittleByte.Messaging.Configuration;
 using Prometheus;
-using Unleash;
-using Unleash.ClientFactory;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.UseSerilog();
