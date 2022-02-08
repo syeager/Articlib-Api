@@ -1,5 +1,7 @@
 using Articlib.Core.Domain.Articles;
+using Articlib.Core.Domain.Articles.Exceptions;
 using Articlib.Core.Domain.Articles.Queries;
+using Articlib.Core.Domain.Users;
 using LittleByte.Core.Dates;
 using LittleByte.Validation;
 using LittleByte.Validation.Test.Categories;
@@ -14,6 +16,9 @@ public class PostArticleServiceCreateTest : UnitTest
     private PostArticleService testObj = null!;
     private IModelValidator<Article> validator = null!;
     private IAddArticleCommand addArticleCommand = null!;
+    private IFindArticleByUrlQuery findArticleByUrlQuery = null!;
+    private IDoesArticlePostExistQuery doesArticlePostExistQuery = null!;
+    private IAddArticlePostCommand addArticlePostCommand = null!;
 
     [SetUp]
     public void SetUp()
@@ -21,9 +26,9 @@ public class PostArticleServiceCreateTest : UnitTest
         validator = Substitute.For<IModelValidator<Article>>();
         addArticleCommand = Substitute.For<IAddArticleCommand>();
         var dateService = Substitute.For<IDateService>();
-        var findArticleByUrlQuery = Substitute.For<IFindArticleByUrlQuery>();
-        var doesArticlePostExistQuery = Substitute.For<IDoesArticlePostExistQuery>();
-        var addArticlePostCommand = Substitute.For<IAddArticlePostCommand>();
+        findArticleByUrlQuery = Substitute.For<IFindArticleByUrlQuery>();
+        doesArticlePostExistQuery = Substitute.For<IDoesArticlePostExistQuery>();
+        addArticlePostCommand = Substitute.For<IAddArticlePostCommand>();
 
         testObj = new PostArticleService(
             validator,
@@ -37,20 +42,49 @@ public class PostArticleServiceCreateTest : UnitTest
     }
 
     [Test]
-    public async Task When_ValidationPasses_Then_AddToRepo()
+    public void When_UserHasPostedArticle_Then_Throw()
     {
-        await testObj.FromUserAsync(TV.Users.Id(), TV.Articles.Url);
+        var userId = TV.Users.Id();
+        var expected = TV.Articles.Valid();
+        var article = expected.GetModelOrThrow();
 
-        addArticleCommand.ReceivedWithAnyArgs(1).Add(new Valid<Article>());
+        findArticleByUrlQuery.FindAsync(TV.Articles.Url).Returns(expected);
+        doesArticlePostExistQuery.SearchAsync(userId, article.Id).Returns(true);
+
+        Assert.ThrowsAsync<UserAlreadyPostedArticleException>(() => testObj.FromUserAsync(userId, article.Url));
     }
 
     [Test]
-    public async Task When_ValidationFails_Then_DontAddToRepo()
+    public async Task When_ArticleExistsFirstUserPost_Then_PostArticle()
     {
-        validator.Sign(null!).ReturnsForAnyArgs(ValidModel.Failed<Article>());
+        var userId = TV.Users.Id();
+        var expected = TV.Articles.Valid();
+        var article = expected.GetModelOrThrow();
 
-        await testObj.FromUserAsync(TV.Users.Id(), TV.Articles.Url);
+        findArticleByUrlQuery.FindAsync(TV.Articles.Url).Returns(expected);
 
-        addArticleCommand.DidNotReceiveWithAnyArgs().Add(new Valid<Article>());
+        var result = await testObj.FromUserAsync(userId, article.Url);
+
+        Assert.AreEqual(article.Id, result.GetModelOrThrow().Id);
+        addArticleCommand.DidNotReceiveWithAnyArgs().Add(default);
+        var expectedPost = new ArticlePost(userId, article.Id, default);
+        addArticlePostCommand.Received(1).Add(expectedPost);
+    }
+
+    [Test]
+    public async Task When_ArticleDoesntExist_Then_CreateArticle()
+    {
+        var userId = TV.Users.Id();
+        var expected = TV.Articles.Valid();
+        var article = expected.GetModelOrThrow();
+
+        validator.Sign(default!).ReturnsForAnyArgs(expected);
+
+        var result = await testObj.FromUserAsync(userId, article.Url);
+
+        Assert.AreEqual(article.Id, result.GetModelOrThrow().Id);
+        addArticleCommand.ReceivedWithAnyArgs(1).Add(default);
+        var expectedPost = new ArticlePost(userId, article.Id, default);
+        addArticlePostCommand.Received(1).Add(expectedPost);
     }
 }
