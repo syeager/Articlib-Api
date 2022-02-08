@@ -10,8 +10,7 @@ internal static partial class TV
     {
         public static readonly Uri Url = new("https://www.test.com");
 
-        public static Article Valid() => Article.Create(new SuccessModelValidator<Article>(), Id(), Url, 0)
-            .GetModelOrThrow();
+        public static Valid<Article> Valid() => Article.Create(new SuccessModelValidator<Article>(), Id(), Url, 0);
 
         public static Id<Article> Id() => Guid.NewGuid();
     }

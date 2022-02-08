@@ -7,7 +7,7 @@ public class ArticleAddVoteTest
     [Test]
     public void When_VoteAdded_Then_VoteCountIncreasesBy1()
     {
-        var article = TV.Articles.Valid();
+        var article = TV.Articles.Valid().GetModelOrThrow();
 
         var initialValue = article.VoteCount;
         article.AddVote();
