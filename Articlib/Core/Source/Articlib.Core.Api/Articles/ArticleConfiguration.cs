@@ -10,7 +10,7 @@ internal static class ArticleConfiguration
     public static IServiceCollection AddArticles(this IServiceCollection @this)
     {
         return @this
-            .AddTransient<CreateArticleController>()
+            .AddTransient<PostArticleController>()
             .AddTransient<LogInController>()
             .AddTransient<IAddVote, AddVote>()
             .AddTransient<IModelValidator<Article>, ArticleValidator>()

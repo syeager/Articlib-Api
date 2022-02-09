@@ -10,14 +10,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace Articlib.Core.Api.Articles;
 
 [Authorize]
-public sealed class CreateArticleController : ArticleController
+public sealed class PostArticleController : ArticleController
 {
     private readonly IPostArticleService postArticleService;
     private readonly IMapper mapper;
     private readonly MessagePublisher messagePublisher;
     private readonly ISaveContextCommand saveContextCommand;
 
-    public CreateArticleController(
+    public PostArticleController(
         ISaveContextCommand saveContextCommand,
         IMapper mapper,
         IPostArticleService postArticleService,
