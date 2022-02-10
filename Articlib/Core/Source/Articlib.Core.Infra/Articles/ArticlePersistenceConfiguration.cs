@@ -17,6 +17,7 @@ internal static class ArticlePersistenceConfiguration
             .AddScoped<IFindByIdQuery<Article>, FindByIdQuery<Article, ArticleDao, CoreDb>>()
             .AddScoped<IFindArticleByUrlQuery, FindArticleByUrlQuery>()
             .AddScoped<IDoesArticlePostExistQuery, DoesArticlePostExistQuery>()
+            .AddScoped<IAddArticlePostCommand, AddArticlePostCommand>()
             .AddScoped<IFilterArticlesQuery, FilterQuery>()
             .AddScoped<IAddArticleCommand, AddArticleCommand>();
     }
