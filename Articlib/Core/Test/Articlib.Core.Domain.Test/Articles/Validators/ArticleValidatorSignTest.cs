@@ -1,5 +1,4 @@
 using Articlib.Core.Domain.Articles;
-using Articlib.Core.Domain.Users;
 using LittleByte.Core.Common;
 using LittleByte.Domain;
 using LittleByte.Validation.Test.Categories;
@@ -22,7 +21,7 @@ public class ArticleValidatorSignTest : UnitTest
     [Test]
     public void Given_ValidValues_Return_Success()
     {
-        var result = testObj.Sign(TV.Articles.Valid());
+        var result = testObj.Sign(TV.Articles.Valid().GetModelOrThrow());
 
         Assert.IsTrue(result.IsSuccess);
     }
@@ -30,17 +29,9 @@ public class ArticleValidatorSignTest : UnitTest
     [Test]
     public void Given_EmptyId_Return_Failure()
     {
-        var result = Article.Create(testObj, Id<Article>.Empty, TV.Articles.Url, TV.Users.Id(), DateTime.UtcNow, 0);
+        var result = Article.Create(testObj, Id<Article>.Empty, TV.Articles.Url, 0);
 
         result.AssertFirstError(nameof(Article.Id), nameof(IdValidator<X, X>));
-    }
-
-    [Test]
-    public void Given_EmptyPosterId_Return_Failure()
-    {
-        var result = Article.Create(testObj, TV.Articles.Id(), TV.Articles.Url, Id<User>.Empty, DateTime.UtcNow, 0);
-
-        result.AssertFirstError(nameof(Article.PosterId), nameof(IdValidator<X, X>));
     }
 
     [Test]
@@ -48,7 +39,7 @@ public class ArticleValidatorSignTest : UnitTest
     {
         var url = TV.Articles.Url.MakeRelativeUri(TV.Articles.Url);
 
-        var result = Article.Create(testObj, TV.Articles.Id(), url, TV.Users.Id(), DateTime.UtcNow, 0);
+        var result = Article.Create(testObj, TV.Articles.Id(), url, 0);
 
         result.AssertFirstError(nameof(Article.Url), nameof(AbsoluteUriValidator<X>));
     }

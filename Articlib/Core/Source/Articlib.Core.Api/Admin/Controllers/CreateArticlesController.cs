@@ -5,13 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Articlib.Core.Api.Admin.Controllers;
 
-public sealed class PostArticleController : AdminController
+public sealed class CreateArticlesController : AdminController
 {
-    private readonly CreateArticleController createArticleController;
+    private readonly PostArticleController postArticleController;
 
-    public PostArticleController(CreateArticleController createArticleController)
+    public CreateArticlesController(PostArticleController postArticleController)
     {
-        this.createArticleController = createArticleController;
+        this.postArticleController = postArticleController;
     }
 
     [HttpPost("article")]
@@ -27,7 +27,7 @@ public sealed class PostArticleController : AdminController
                 PosterId = HttpContext.GetUserId()!.Value,
                 Url = $"https://www.google.com/{Guid.NewGuid()}",
             };
-            var result = await createArticleController.Create(request);
+            var result = await postArticleController.Create(request);
             articles.Add(result.Obj!);
         }
 
