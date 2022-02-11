@@ -1,7 +1,6 @@
 using Articlib.Core.Domain.Articles;
 using Articlib.Core.Domain.Articles.Exceptions;
 using Articlib.Core.Domain.Articles.Queries;
-using Articlib.Core.Domain.Users;
 using LittleByte.Core.Dates;
 using LittleByte.Validation;
 using LittleByte.Validation.Test.Categories;
@@ -67,8 +66,7 @@ public class PostArticleServiceCreateTest : UnitTest
 
         Assert.AreEqual(article.Id, result.GetModelOrThrow().Id);
         addArticleCommand.DidNotReceiveWithAnyArgs().Add(default);
-        var expectedPost = new ArticlePost(userId, article.Id, default);
-        addArticlePostCommand.Received(1).Add(expectedPost);
+        addArticlePostCommand.ReceivedWithAnyArgs(1).Add(default!);
     }
 
     [Test]
@@ -84,7 +82,6 @@ public class PostArticleServiceCreateTest : UnitTest
 
         Assert.AreEqual(article.Id, result.GetModelOrThrow().Id);
         addArticleCommand.ReceivedWithAnyArgs(1).Add(default);
-        var expectedPost = new ArticlePost(userId, article.Id, default);
-        addArticlePostCommand.Received(1).Add(expectedPost);
+        addArticlePostCommand.ReceivedWithAnyArgs(1).Add(default!);
     }
 }
