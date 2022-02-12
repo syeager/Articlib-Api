@@ -7,7 +7,7 @@ public static class VoteConfiguration
     public static IServiceCollection AddVotes(this IServiceCollection @this)
     {
         return @this
-            .AddTransient<IAddVote, AddVote>()
+            .AddTransient<IAddVoteService, AddVoteService>()
             .AddTransient<IRemoveVote, RemoveVote>();
     }
 }

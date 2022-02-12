@@ -16,20 +16,20 @@ namespace Articlib.Core.Api.Votes.Controllers;
 public sealed class AddVoteController : VoteController
 {
     private readonly IMapper mapper;
-    private readonly IAddVote addVote;
+    private readonly IAddVoteService addVoteService;
 
     private readonly ISaveContextCommand saveContextCommand;
 
     public AddVoteController(
         IMapper mapper,
-        IAddVote addVote,
+        IAddVoteService addVoteService,
         IFindByIdQuery<User> findUser,
         IFindByIdQuery<Article> findArticle,
         ISaveContextCommand saveContextCommand)
         : base(findUser, findArticle)
     {
         this.mapper = mapper;
-        this.addVote = addVote;
+        this.addVoteService = addVoteService;
         this.saveContextCommand = saveContextCommand;
     }
 
@@ -40,7 +40,7 @@ public sealed class AddVoteController : VoteController
     public async Task<ApiResponse<ArticleDto>> AddVote(VoteRequest request)
     {
         var (user, article) = await GetUserAndArticle(request);
-        await addVote.AddAsync(article, user);
+        await addVoteService.AddAsync(article, user);
 
         await saveContextCommand.CommitChangesAsync();
 
