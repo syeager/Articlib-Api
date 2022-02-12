@@ -1,17 +1,17 @@
-﻿using LittleByte.Domain;
+using LittleByte.Domain;
 
 namespace Articlib.Core.Domain.Articles;
 
 public sealed class ArticleTag
 {
     public Id<Article> ArticleId { get; init; }
-    public string Tag { get; init; } = null!;
+    public string TagName { get; init; }
     public uint Score { get; init; }
 
-    public ArticleTag(Id<Article> articleId, string tag, uint score)
+    public ArticleTag(Id<Article> articleId, string tagName, uint score)
     {
         ArticleId = articleId;
-        Tag = tag;
+        TagName = tagName;
         Score = score;
     }
 }
