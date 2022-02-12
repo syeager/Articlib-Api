@@ -12,7 +12,7 @@ internal static class ArticleConfiguration
         return @this
             .AddTransient<PostArticleController>()
             .AddTransient<LogInController>()
-            .AddTransient<IAddVote, AddVote>()
+            .AddTransient<IAddVoteService, AddVoteService>()
             .AddTransient<IModelValidator<Article>, ArticleValidator>()
             .AddTransient<IPostArticleService, PostArticleService>();
     }

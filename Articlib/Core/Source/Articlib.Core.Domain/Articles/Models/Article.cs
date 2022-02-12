@@ -1,3 +1,4 @@
+using Articlib.Core.Domain.Articles.Exceptions;
 using LittleByte.Domain;
 
 namespace Articlib.Core.Domain.Articles;
@@ -28,13 +29,21 @@ public sealed class Article
 
     public void AddVote()
     {
-        // TODO: Handle overflow.
+        if(VoteCount == uint.MaxValue)
+        {
+            throw new ArticleVoteOverflowException(this);
+        }
+
         ++VoteCount;
     }
 
     public void RemoveVote()
     {
-        // TODO: Handle overflow.
+        if(VoteCount == uint.MinValue)
+        {
+            throw new ArticleVoteOverflowException(this);
+        }
+
         --VoteCount;
     }
 }

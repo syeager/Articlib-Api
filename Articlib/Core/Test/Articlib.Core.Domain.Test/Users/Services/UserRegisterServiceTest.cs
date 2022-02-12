@@ -1,13 +1,14 @@
-﻿using Articlib.Core.Domain.Users;
+using Articlib.Core.Domain.Users;
 using Articlib.Core.Domain.Users.Commands;
 using LittleByte.Validation;
+using LittleByte.Validation.Test.Categories;
 using LittleByte.Validation.Test.TestUtilities;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace Articlib.Core.Domain.Test.Users;
 
-public class UserRegisterServiceTest
+public class UserRegisterServiceTest : UnitTest
 {
     private UserRegisterService testObj = null!;
     private IAddUserCommand addUserCommand = null!;

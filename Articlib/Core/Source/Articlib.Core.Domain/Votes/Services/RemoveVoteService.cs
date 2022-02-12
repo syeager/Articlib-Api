@@ -6,18 +6,18 @@ using Serilog;
 
 namespace Articlib.Core.Domain.Votes.Services;
 
-public interface IRemoveVote
+public interface IRemoveVoteService
 {
     Task<Article> RemoveAsync(Article article, User user);
 }
 
-public sealed class RemoveVote : IRemoveVote
+public sealed class RemoveVoteService : IRemoveVoteService
 {
-    private readonly ILogger logger = Log.ForContext<RemoveVote>();
+    private readonly ILogger logger = Log.ForContext<RemoveVoteService>();
     private readonly IFindVoteQuery findVoteQuery;
     private readonly IRemoveVoteCommand removeVoteCommand;
 
-    public RemoveVote(IFindVoteQuery findVoteQuery, IRemoveVoteCommand removeVoteCommand)
+    public RemoveVoteService(IFindVoteQuery findVoteQuery, IRemoveVoteCommand removeVoteCommand)
     {
         this.findVoteQuery = findVoteQuery;
         this.removeVoteCommand = removeVoteCommand;
