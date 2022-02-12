@@ -22,12 +22,12 @@ public sealed class CreateArticlesController : AdminController
         var articles = new List<ArticleDto>(count);
         for(var i = 0; i < count; i++)
         {
-            var request = new ArticleCreateRequest
+            var request = new PostArticleRequest
             {
                 PosterId = HttpContext.GetUserId()!.Value,
                 Url = $"https://www.google.com/{Guid.NewGuid()}",
             };
-            var result = await postArticleController.Create(request);
+            var result = await postArticleController.Post(request);
             articles.Add(result.Obj!);
         }
 

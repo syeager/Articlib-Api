@@ -29,10 +29,10 @@ public sealed class PostArticleController : ArticleController
         this.messagePublisher = messagePublisher;
     }
 
-    [HttpPost("create")]
+    [HttpPost("post")]
     [ResponseType(HttpStatusCode.BadRequest)]
     [ResponseType(HttpStatusCode.Created, typeof(ArticleDto))]
-    public async Task<ApiResponse<ArticleDto>> Create(ArticleCreateRequest request)
+    public async Task<ApiResponse<ArticleDto>> Post(PostArticleRequest request)
     {
         var validArticle = await postArticleService.FromUserAsync(request.PosterId, new Uri(request.Url));
         var article = validArticle.GetModelOrThrow();
