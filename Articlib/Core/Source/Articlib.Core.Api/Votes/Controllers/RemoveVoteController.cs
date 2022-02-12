@@ -15,19 +15,19 @@ namespace Articlib.Core.Api.Votes.Controllers;
 public sealed class RemoveVoteController : VoteController
 {
     private readonly IMapper mapper;
-    private readonly IRemoveVote removeVote;
+    private readonly IRemoveVoteService removeVoteService;
     private readonly ISaveContextCommand saveContextCommand;
 
     public RemoveVoteController(
         IMapper mapper,
-        IRemoveVote removeVote,
+        IRemoveVoteService removeVoteService,
         IFindByIdQuery<User> findUser,
         IFindByIdQuery<Article> findArticle,
         ISaveContextCommand saveContextCommand)
         : base(findUser, findArticle)
     {
         this.mapper = mapper;
-        this.removeVote = removeVote;
+        this.removeVoteService = removeVoteService;
         this.saveContextCommand = saveContextCommand;
     }
 
@@ -37,7 +37,7 @@ public sealed class RemoveVoteController : VoteController
     public async Task<ApiResponse<ArticleDto>> RemoveVote(VoteRequest request)
     {
         var (user, article) = await GetUserAndArticle(request);
-        await removeVote.RemoveAsync(article, user);
+        await removeVoteService.RemoveAsync(article, user);
 
         await saveContextCommand.CommitChangesAsync();
 

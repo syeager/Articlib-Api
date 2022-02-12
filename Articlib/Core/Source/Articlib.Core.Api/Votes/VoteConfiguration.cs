@@ -8,6 +8,6 @@ public static class VoteConfiguration
     {
         return @this
             .AddTransient<IAddVoteService, AddVoteService>()
-            .AddTransient<IRemoveVote, RemoveVote>();
+            .AddTransient<IRemoveVoteService, RemoveVoteService>();
     }
 }
