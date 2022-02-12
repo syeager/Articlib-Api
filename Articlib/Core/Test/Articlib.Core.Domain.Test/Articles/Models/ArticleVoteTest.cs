@@ -8,7 +8,7 @@ public class ArticleVoteTest
     [Test]
     public void When_VoteAdded_Then_VoteCountIncreasedBy1()
     {
-        var article = TV.Articles.Valid().GetModelOrThrow();
+        var article = TV.Articles.New().GetModelOrThrow();
 
         var initialValue = article.VoteCount;
         article.AddVote();
@@ -19,7 +19,7 @@ public class ArticleVoteTest
     [Test]
     public void When_VoteCountExceedsMax_Then_Throw()
     {
-        var article = TV.Articles.Valid(uint.MaxValue).GetModelOrThrow();
+        var article = TV.Articles.New(uint.MaxValue).GetModelOrThrow();
 
         Assert.Throws<ArticleVoteOverflowException>(() => article.AddVote());
     }
@@ -27,7 +27,7 @@ public class ArticleVoteTest
     [Test]
     public void When_VoteRemoved_Then_VoteCountDecreasedBy1()
     {
-        var article = TV.Articles.Valid(1).GetModelOrThrow();
+        var article = TV.Articles.New(1).GetModelOrThrow();
 
         var initialValue = article.VoteCount;
         article.RemoveVote();
@@ -38,7 +38,7 @@ public class ArticleVoteTest
     [Test]
     public void When_VoteCountExceedsMin_Then_Throw()
     {
-        var article = TV.Articles.Valid().GetModelOrThrow();
+        var article = TV.Articles.New().GetModelOrThrow();
 
         Assert.Throws<ArticleVoteOverflowException>(() => article.RemoveVote());
     }

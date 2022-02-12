@@ -21,7 +21,7 @@ public class ArticleValidatorSignTest : UnitTest
     [Test]
     public void Given_ValidValues_Return_Success()
     {
-        var result = testObj.Sign(TV.Articles.Valid().GetModelOrThrow());
+        var result = testObj.Sign(TV.Articles.New().GetModelOrThrow());
 
         Assert.IsTrue(result.IsSuccess);
     }

@@ -44,7 +44,7 @@ public class PostArticleServiceCreateTest : UnitTest
     public void When_UserHasPostedArticle_Then_Throw()
     {
         var userId = TV.Users.Id();
-        var expected = TV.Articles.Valid();
+        var expected = TV.Articles.New();
         var article = expected.GetModelOrThrow();
 
         findArticleByUrlQuery.FindAsync(TV.Articles.Url).Returns(expected);
@@ -57,7 +57,7 @@ public class PostArticleServiceCreateTest : UnitTest
     public async Task When_ArticleExistsFirstUserPost_Then_PostArticle()
     {
         var userId = TV.Users.Id();
-        var expected = TV.Articles.Valid();
+        var expected = TV.Articles.New();
         var article = expected.GetModelOrThrow();
 
         findArticleByUrlQuery.FindAsync(TV.Articles.Url).Returns(expected);
@@ -73,7 +73,7 @@ public class PostArticleServiceCreateTest : UnitTest
     public async Task When_ArticleDoesntExist_Then_CreateArticle()
     {
         var userId = TV.Users.Id();
-        var expected = TV.Articles.Valid();
+        var expected = TV.Articles.New();
         var article = expected.GetModelOrThrow();
 
         validator.Sign(default!).ReturnsForAnyArgs(expected);
