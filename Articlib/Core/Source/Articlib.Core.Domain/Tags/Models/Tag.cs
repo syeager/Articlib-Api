@@ -1,4 +1,4 @@
-namespace Articlib.Core.Domain.Articles;
+namespace Articlib.Core.Domain.Tags.Models;
 
 public sealed class Tag
 {
