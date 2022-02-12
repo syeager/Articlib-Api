@@ -1,17 +1,14 @@
-using Articlib.Core.Domain.Articles;
-using Articlib.Core.Domain.Users;
 using Articlib.Core.Domain.Votes.Commands;
 using Articlib.Core.Domain.Votes.Models;
 using Articlib.Core.Domain.Votes.Queries;
 using Articlib.Core.Domain.Votes.Services;
 using LittleByte.Core.Dates;
-using LittleByte.Validation.Test.Categories;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace Articlib.Core.Domain.Test.Votes.Services;
 
-public class AddVoteServiceTest : UnitTest
+public class AddVoteServiceTest : VoteServiceTest
 {
     private AddVoteService testObj = null!;
     private IFindVoteQuery findVoteQuery = null!;
@@ -51,16 +48,4 @@ public class AddVoteServiceTest : UnitTest
         Assert.AreEqual(voteCount + 1, article.VoteCount);
         addVoteCommand.ReceivedWithAnyArgs(1).Add(default!);
     }
-
-    #region Helpers
-
-    private static (Article article, User user, uint voteCount) NewArticleAndUser()
-    {
-        const int voteCount = 1;
-        var article = TV.Articles.New(voteCount).GetModelOrThrow();
-        var user = TV.Users.New().GetModelOrThrow();
-        return (article, user, voteCount);
-    }
-
-    #endregion
 }
