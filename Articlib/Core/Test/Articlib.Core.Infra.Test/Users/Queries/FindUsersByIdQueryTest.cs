@@ -1,12 +1,13 @@
-﻿using Articlib.Core.Infra.Persistence;
+using Articlib.Core.Infra.Persistence;
 using Articlib.Core.Infra.Users.Queries;
 using LittleByte.Extensions.AutoMapper;
 using LittleByte.Test.EntityFramework;
+using LittleByte.Validation.Test.Categories;
 using NUnit.Framework;
 
 namespace Articlib.Core.Infra.Test.Users.Queries;
 
-public class FindUsersByIdQueryTest
+public class FindUsersByIdQueryTest : UnitTest
 {
     private FindUsersByIdQuery testObj = null!;
     private CoreDb coreDb = null!;

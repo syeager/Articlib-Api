@@ -5,12 +5,13 @@ using Articlib.Core.Domain.Votes.Models;
 using Articlib.Core.Domain.Votes.Queries;
 using Articlib.Core.Domain.Votes.Services;
 using LittleByte.Core.Dates;
+using LittleByte.Validation.Test.Categories;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace Articlib.Core.Domain.Test.Votes.Services;
 
-public class AddVoteServiceTest
+public class AddVoteServiceTest : UnitTest
 {
     private AddVoteService testObj = null!;
     private IFindVoteQuery findVoteQuery = null!;

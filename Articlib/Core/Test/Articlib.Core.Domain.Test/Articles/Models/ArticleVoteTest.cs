@@ -1,9 +1,10 @@
 using Articlib.Core.Domain.Articles.Exceptions;
+using LittleByte.Validation.Test.Categories;
 using NUnit.Framework;
 
 namespace Articlib.Core.Domain.Test.Articles;
 
-public class ArticleVoteTest
+public class ArticleVoteTest : UnitTest
 {
     [Test]
     public void When_VoteAdded_Then_VoteCountIncreasedBy1()
