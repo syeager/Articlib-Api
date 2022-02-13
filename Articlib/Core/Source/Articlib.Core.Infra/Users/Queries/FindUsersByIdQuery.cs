@@ -1,6 +1,7 @@
-﻿using Articlib.Core.Domain.Users;
+using Articlib.Core.Domain.Users;
 using Articlib.Core.Infra.Persistence;
 using AutoMapper;
+using LittleByte.Extensions.AutoMapper;
 using Microsoft.EntityFrameworkCore;
 
 namespace Articlib.Core.Infra.Users.Queries;
@@ -27,9 +28,7 @@ internal sealed class FindUsersByIdQuery : IFindUsersByIdQuery
             .Where(u => ids.Contains(u.Id))
             .ToArrayAsync();
 
-        var users = entities
-            .Select(mapper.Map<User>) // TODO: not gonna work
-            .ToArray();
+        var users = mapper.MapRange<User>(entities);
 
         return users;
     }
