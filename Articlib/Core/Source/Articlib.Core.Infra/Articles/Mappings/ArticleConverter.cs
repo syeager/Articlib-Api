@@ -18,11 +18,14 @@ internal sealed class ArticleConverter : ITypeConverter<ArticleDao, Valid<Articl
 
     public Valid<Article> Convert(ArticleDao source, Valid<Article> destination, ResolutionContext context)
     {
+        var articleTags = source.ArticleTags.Select(context.Mapper.Map<ArticleTag>).ToArray();
+
         var article = Article.Create(
             validator,
             source.Id,
             new Uri(source.Url),
-            source.VoteCount);
+            source.VoteCount,
+            articleTags);
         return article;
     }
 }

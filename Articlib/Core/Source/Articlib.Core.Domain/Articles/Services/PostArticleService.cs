@@ -59,7 +59,7 @@ public sealed class PostArticleService : IPostArticleService
             Logs.DiagnosticContext.Set(LK.Article.Id, id);
             logger.Information("Posting new article");
 
-            var newArticle = Article.Create(validator, id, url, 0);
+            var newArticle = Article.Create(validator, id, url, 0, new List<ArticleTag>());
             addArticleCommand.Add(newArticle);
             article = newArticle;
         }

@@ -31,4 +31,9 @@
         <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
         <PackageReference Include="Serilog.Extensions.Hosting" Version="4.2.0" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Tags\Models\" />
+      <Folder Include="Tags\Services\" />
+    </ItemGroup>
 </Project>

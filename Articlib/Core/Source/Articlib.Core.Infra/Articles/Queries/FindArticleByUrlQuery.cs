@@ -21,7 +21,10 @@ internal sealed class FindArticleByUrlQuery : IFindArticleByUrlQuery
     public async Task<Valid<Article>?> FindAsync(Uri url)
     {
         var urlString = url.AbsoluteUri; // TODO: Normalize.
-        var articleEntity = await coreDb.Articles.FirstOrDefaultAsync(a => a.Url == urlString);
+        var articleEntity = await coreDb.Articles
+            .Include(a => a.ArticleTags).AsNoTracking()
+            .FirstOrDefaultAsync(a => a.Url == urlString);
+
         if(articleEntity is null)
         {
             return null;

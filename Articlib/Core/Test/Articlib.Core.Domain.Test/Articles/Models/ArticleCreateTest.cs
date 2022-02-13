@@ -13,7 +13,8 @@ public class ArticleCreateTest : UnitTest
     [Test]
     public void When_ValidationPasses_Then_ReturnModel()
     {
-        var result = Article.Create(passValidator, TV.Articles.Id(), TV.Articles.Url, 0);
+        var (id, articleTags) = TV.Articles.IdAndArticleTags();
+        var result = Article.Create(passValidator, id, TV.Articles.Url, 0, articleTags);
 
         Assert.IsTrue(result.IsSuccess);
     }
@@ -21,7 +22,8 @@ public class ArticleCreateTest : UnitTest
     [Test]
     public void When_ValidationFails_Then_DontThrow()
     {
-        var result = Article.Create(failValidator, TV.Articles.Id(), null!, 0);
+        var (id, articleTags) = TV.Articles.IdAndArticleTags();
+        var result = Article.Create(failValidator, id, null!, 0, articleTags);
 
         Assert.IsFalse(result.IsSuccess);
     }

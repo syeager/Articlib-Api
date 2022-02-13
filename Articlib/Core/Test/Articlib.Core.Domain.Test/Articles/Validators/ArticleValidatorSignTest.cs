@@ -29,7 +29,8 @@ public class ArticleValidatorSignTest : UnitTest
     [Test]
     public void Given_EmptyId_Return_Failure()
     {
-        var result = Article.Create(testObj, Id<Article>.Empty, TV.Articles.Url, 0);
+        var articleTags = TV.Articles.ArticleTags(Id<Article>.Empty);
+        var result = Article.Create(testObj, Id<Article>.Empty, TV.Articles.Url, 0, articleTags);
 
         result.AssertFirstError(nameof(Article.Id), nameof(IdValidator<X, X>));
     }
@@ -38,8 +39,9 @@ public class ArticleValidatorSignTest : UnitTest
     public void Given_RelativeUrl_Return_Failure()
     {
         var url = TV.Articles.Url.MakeRelativeUri(TV.Articles.Url);
+        var (id, articleTags) = TV.Articles.IdAndArticleTags();
 
-        var result = Article.Create(testObj, TV.Articles.Id(), url, 0);
+        var result = Article.Create(testObj, id, url, 0, articleTags);
 
         result.AssertFirstError(nameof(Article.Url), nameof(AbsoluteUriValidator<X>));
     }

@@ -1,5 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
 using Articlib.Core.Infra.Articles.Models;
+using Articlib.Core.Infra.Tags.Models;
 using Articlib.Core.Infra.Users.Entities;
 using Articlib.Core.Infra.Votes.Models;
 using AutoMapper;
@@ -13,6 +14,8 @@ internal class CoreDb : DomainContext<CoreDb, UserDao, UserRole>
 {
     public DbSet<ArticleDao> Articles { get; set; } = null!;
     public DbSet<ArticlePostDao> ArticlePosts { get; set; } = null!;
+    public DbSet<ArticleTagDao> ArticleTags { get; set; } = null!;
+    public DbSet<TagDao> Tags { get; set; } = null!;
     public DbSet<VoteDao> Votes { get; set; } = null!;
 
     public CoreDb(IMapper mapper, DbContextOptions<CoreDb> options)
@@ -22,7 +25,8 @@ internal class CoreDb : DomainContext<CoreDb, UserDao, UserRole>
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<VoteDao>().HasKey(v => new {v.ArticleId, v.UserId});
         modelBuilder.Entity<ArticlePostDao>().HasKey(ap => new {ap.UserId, ap.ArticleId});
+        modelBuilder.Entity<ArticleTagDao>().HasKey(at => new {at.ArticleId, at.TagName});
+        modelBuilder.Entity<VoteDao>().HasKey(v => new {v.ArticleId, v.UserId});
     }
 }

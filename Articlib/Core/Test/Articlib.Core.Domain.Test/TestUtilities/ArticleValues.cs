@@ -10,8 +10,22 @@ internal static partial class TV
     {
         public static readonly Uri Url = new("https://www.test.com");
 
-        public static Valid<Article> New(uint voteCount = 0) => Article.Create(new SuccessModelValidator<Article>(), Id(), Url, voteCount);
-
         public static Id<Article> Id() => Guid.NewGuid();
+
+        public static Valid<Article> New(uint voteCount = 0)
+        {
+            var id = Id();
+
+            return Article.Create(new SuccessModelValidator<Article>(), id, Url, voteCount, ArticleTags(id));
+        }
+
+        public static List<ArticleTag> ArticleTags(Id<Article> articleId) => new() {new (articleId, "dotnet", 1)};
+
+        public static (Id<Article> id, List<ArticleTag> articleTags) IdAndArticleTags()
+        {
+            var id = Id();
+            var articleTags = ArticleTags(id);
+            return (id, articleTags);
+        }
     }
 }
