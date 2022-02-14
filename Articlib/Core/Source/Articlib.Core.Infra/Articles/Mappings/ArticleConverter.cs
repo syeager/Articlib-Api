@@ -22,7 +22,9 @@ internal sealed class ArticleConverter : ITypeConverter<ArticleDao, Valid<Articl
             validator,
             source.Id,
             new Uri(source.Url),
-            source.VoteCount);
+            source.VoteCount,
+            source.PostedCount,
+            source.LastPostedDate);
         return article;
     }
 }

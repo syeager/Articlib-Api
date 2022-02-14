@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using LittleByte.Logging;
 
 namespace Articlib.Core.Domain;
 

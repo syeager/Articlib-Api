@@ -1,6 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
 using Articlib.Core.Domain.Users;
-using LittleByte.Domain;
 
 namespace Articlib.Core.Domain.Articles.Exceptions;
 
@@ -12,7 +11,7 @@ public sealed class UserAlreadyPostedArticleException : Exception
     public Id<Article> ArticleId { get; }
 
     public UserAlreadyPostedArticleException(Id<User> userId, Id<Article> articleId)
-    : base("User has already posted this article")
+        : base("User has already posted this article")
     {
         UserId = userId;
         ArticleId = articleId;

@@ -1,6 +1,4 @@
-﻿using LittleByte.Domain;
-
-namespace Articlib.Core.Domain.Users;
+﻿namespace Articlib.Core.Domain.Users;
 
 public sealed class User
 {

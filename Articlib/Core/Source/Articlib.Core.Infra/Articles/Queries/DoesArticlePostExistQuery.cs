@@ -18,7 +18,8 @@ internal sealed class DoesArticlePostExistQuery : IDoesArticlePostExistQuery
 
     public async Task<bool> SearchAsync(Id<User> userId, Id<Article> articleId)
     {
-        var postExists = await coreDb.ArticlePosts.AnyAsync(ap => ap.UserId == userId.Value && ap.ArticleId == articleId.Value);
+        var postExists =
+            await coreDb.ArticlePosts.AnyAsync(ap => ap.UserId == userId.Value && ap.ArticleId == articleId.Value);
         return postExists;
     }
 }
