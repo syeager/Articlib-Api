@@ -1,5 +1,6 @@
 using Articlib.Core.Api.Users;
 using Articlib.Core.Domain.Articles;
+using Articlib.Core.Domain.Articles.Services;
 using Articlib.Core.Domain.Votes.Services;
 using LittleByte.Validation;
 

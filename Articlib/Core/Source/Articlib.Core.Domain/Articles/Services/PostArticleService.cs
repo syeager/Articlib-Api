@@ -1,12 +1,8 @@
 using Articlib.Core.Domain.Articles.Exceptions;
 using Articlib.Core.Domain.Articles.Queries;
 using Articlib.Core.Domain.Users;
-using LittleByte.Core.Dates;
-using LittleByte.Domain;
-using LittleByte.Logging;
-using Serilog;
 
-namespace Articlib.Core.Domain.Articles;
+namespace Articlib.Core.Domain.Articles.Services;
 
 public interface IPostArticleService
 {
