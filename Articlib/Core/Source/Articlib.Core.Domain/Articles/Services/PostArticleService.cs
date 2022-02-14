@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Articlib.Core.Domain.Articles.Exceptions;
 using Articlib.Core.Domain.Articles.Queries;
 using Articlib.Core.Domain.Users;
@@ -40,36 +41,51 @@ public sealed class PostArticleService : IPostArticleService
         using var log = logger.Props()
             .DiagnosticPush(LK.Article.PosterId, userId);
 
-        var article = await FindOrCreateArticleAsync(url);
-        await CreateArticlePostAsync(userId, article.GetModelOrThrow());
+        var now = dateService.UtcNow;
+
+        var article = await FindOrCreateArticleAsync(url, now);
+        await CreateArticlePostAsync(userId, article.GetModelOrThrow(), now);
 
         return article;
     }
 
-    private async Task<Valid<Article>> FindOrCreateArticleAsync(Uri url)
+    private async Task<Valid<Article>> FindOrCreateArticleAsync(Uri url, DateTime postDate)
     {
-        var article = await findArticleByUrlQuery.FindAsync(url);
-        if(article is null)
-        {
-            var id = Guid.NewGuid();
-            Logs.DiagnosticContext.Set(LK.Article.Id, id);
-            logger.Information("Posting new article");
+        var existingArticle = await findArticleByUrlQuery.FindAsync(url);
+        var validArticle = existingArticle is null
+            ? CreateArticle(url, postDate)
+            : AddNewPost(postDate, existingArticle);
 
-            var newArticle = Article.Create(validator, id, url, 0);
-            addArticleCommand.Add(newArticle);
-            article = newArticle;
-        }
-        else
-        {
-            var id = article.Value.GetModelOrThrow().Id;
-            Logs.DiagnosticContext.Set(LK.Article.Id, id);
-            logger.Information("Already posted article found");
-        }
-
-        return article.Value;
+        return validArticle;
     }
 
-    private async Task CreateArticlePostAsync(Id<User> userId, Article article)
+    private Valid<Article> CreateArticle(Uri url, DateTime postDate)
+    {
+        Valid<Article> validArticle;
+        var id = new Id<Article>();
+
+        Logs.DiagnosticContext.Set(LK.Article.Id, id);
+        logger.Information("Posting new article");
+
+        validArticle = Article.Create(validator, id, url, 0, 1, postDate);
+        addArticleCommand.Add(validArticle);
+        return validArticle;
+    }
+
+    private Valid<Article> AddNewPost(DateTime postDate, [DisallowNull] Valid<Article>? existingArticle)
+    {
+        Valid<Article> validArticle;
+        validArticle = existingArticle.Value;
+        var article = validArticle.GetModelOrThrow();
+
+        Logs.DiagnosticContext.Set(LK.Article.Id, article.Id);
+        logger.Information("Already posted article found");
+
+        article.AddPost(postDate);
+        return validArticle;
+    }
+
+    private async Task CreateArticlePostAsync(Id<User> userId, Article article, DateTime postDate)
     {
         var hasUserAlreadyPosted = await doesArticlePostExistQuery.SearchAsync(userId, article.Id);
         if(hasUserAlreadyPosted)
@@ -78,8 +94,7 @@ public sealed class PostArticleService : IPostArticleService
         }
 
         logger.Information("New article post");
-        var now = dateService.UtcNow;
-        var articlePost = new ArticlePost(userId, article.Id, now);
+        var articlePost = new ArticlePost(userId, article.Id, postDate);
         addArticlePostCommand.Add(articlePost);
     }
 }
