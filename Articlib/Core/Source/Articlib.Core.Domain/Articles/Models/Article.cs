@@ -1,5 +1,4 @@
 using Articlib.Core.Domain.Articles.Exceptions;
-using LittleByte.Domain;
 
 namespace Articlib.Core.Domain.Articles;
 

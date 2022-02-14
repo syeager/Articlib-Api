@@ -1,5 +1,4 @@
 ﻿using Articlib.Core.Domain.Users;
-using LittleByte.Domain;
 
 namespace Articlib.Core.Domain.Articles.Queries;
 

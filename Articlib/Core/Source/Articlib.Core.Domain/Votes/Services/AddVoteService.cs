@@ -1,10 +1,8 @@
-using Articlib.Core.Domain.Articles;
+﻿using Articlib.Core.Domain.Articles;
 using Articlib.Core.Domain.Users;
 using Articlib.Core.Domain.Votes.Commands;
 using Articlib.Core.Domain.Votes.Models;
 using Articlib.Core.Domain.Votes.Queries;
-using LittleByte.Core.Dates;
-using Serilog;
 
 namespace Articlib.Core.Domain.Votes.Services;
 

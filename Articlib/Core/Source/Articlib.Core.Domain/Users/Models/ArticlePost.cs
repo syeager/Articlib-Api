@@ -1,6 +1,5 @@
 using Articlib.Core.Domain.Articles;
 using JetBrains.Annotations;
-using LittleByte.Domain;
 
 namespace Articlib.Core.Domain.Users;
 
