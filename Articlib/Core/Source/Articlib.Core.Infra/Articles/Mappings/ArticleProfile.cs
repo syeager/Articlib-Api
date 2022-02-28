@@ -18,7 +18,7 @@ public sealed class ArticleProfile : Profile
         CreateMap<Uri, string>().ConvertUsing(uri => uri.AbsoluteUri);
         CreateMap<string, Uri>().ConvertUsing(s => new Uri(s));
 
-        CreateMap<Article, ArticleDao>();
+        CreateMap<Valid<Article>, ArticleDao>();
         CreateMap<ArticleDao, Valid<Article>>().DisableCtorValidation().ConvertUsing<ArticleConverter>();
 
         this.CreateBiDirectionMap<VoteDao, Vote>();

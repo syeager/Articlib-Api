@@ -9,6 +9,7 @@ using LittleByte.Extensions.AspNet.Responses;
 using LittleByte.Extensions.AspNet.Unleash;
 using LittleByte.Infra.Commands;
 using LittleByte.Infra.Queries;
+using LittleByte.Validation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Articlib.Core.Api.Votes.Controllers;
@@ -24,7 +25,7 @@ public sealed class AddVoteController : VoteController
         IMapper mapper,
         IAddVoteService addVoteService,
         IFindByIdQuery<User> findUser,
-        IFindByIdQuery<Article> findArticle,
+        IFindByIdQuery<Valid<Article>> findArticle,
         ISaveContextCommand saveContextCommand)
         : base(findUser, findArticle)
     {
