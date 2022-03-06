@@ -5,7 +5,7 @@ namespace Articlib.Core.Infra.Articles.Models;
 internal class ArticleDao : Entity
 {
     public string Url { get; init; } = null!;
-    public uint VoteCount { get; init; }
+    public uint VoteCount { get; set; }
     public uint PostedCount { get; init; }
     public DateTime LastPostedDate { get; set; }
 

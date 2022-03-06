@@ -17,6 +17,6 @@ internal sealed class AddArticleCommand : IAddArticleCommand
     public void Add(Valid<Article> article)
     {
         var domain = article.GetModelOrThrow();
-        coreDb.Add<Article, ArticleDao>(domain);
+        coreDb.Add<ArticleDao>(domain);
     }
 }
