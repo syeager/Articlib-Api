@@ -2,17 +2,16 @@ using Articlib.Core.Domain.Articles.Exceptions;
 
 namespace Articlib.Core.Domain.Articles;
 
-public sealed class Article
+public sealed class Article : DomainModel<Article>
 {
-    public Id<Article> Id { get; }
     public Uri Url { get; }
     public uint VoteCount { get; private set; }
     public uint PostedCount { get; private set; }
     public DateTime LastPostedDate { get; private set; }
 
     private Article(Id<Article> id, Uri url, uint voteCount, uint postedCount, DateTime lastPostedDate)
+        : base(id)
     {
-        Id = id;
         Url = url;
         VoteCount = voteCount;
         PostedCount = postedCount;

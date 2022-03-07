@@ -8,7 +8,6 @@ using AutoMapper;
 using LittleByte.Extensions.AspNet.Responses;
 using LittleByte.Infra.Commands;
 using LittleByte.Infra.Queries;
-using LittleByte.Validation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Articlib.Core.Api.Votes.Controllers;
@@ -23,7 +22,7 @@ public sealed class RemoveVoteController : VoteController
         IMapper mapper,
         IRemoveVoteService removeVoteService,
         IFindByIdQuery<User> findUser,
-        IFindByIdQuery<Valid<Article>> findArticle,
+        IFindByIdQuery<Article> findArticle,
         ISaveContextCommand saveContextCommand)
         : base(findUser, findArticle)
     {

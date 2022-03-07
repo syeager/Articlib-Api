@@ -1,14 +1,13 @@
-﻿namespace Articlib.Core.Domain.Users;
+namespace Articlib.Core.Domain.Users;
 
-public sealed class User
+public sealed class User : DomainModel<User>
 {
-    public Id<User> Id { get; }
     public Email Email { get; }
     public Name Name { get; }
 
     private User(Id<User> id, Email email, Name name)
+        : base(id)
     {
-        Id = id;
         Email = email;
         Name = name;
     }
