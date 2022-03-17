@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Articlib.Core.Api.Articles;
 using Articlib.Core.Api.Votes.Requests;
 using Articlib.Core.Domain.Articles;

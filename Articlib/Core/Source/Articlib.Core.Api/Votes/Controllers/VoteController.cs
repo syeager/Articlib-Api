@@ -1,4 +1,4 @@
-﻿using Articlib.Core.Api.Votes.Requests;
+using Articlib.Core.Api.Votes.Requests;
 using Articlib.Core.Domain.Articles;
 using Articlib.Core.Domain.Users;
 using LittleByte.Infra.Queries;
@@ -25,6 +25,6 @@ public abstract class VoteController : Controller
     {
         var user = await findUser.FindRequiredAsync(request.UserId);
         var article = await findArticle.FindRequiredForEditAsync(request.ArticleId);
-        return (user, article);
+        return (user.GetModelOrThrow(), article.GetModelOrThrow());
     }
 }

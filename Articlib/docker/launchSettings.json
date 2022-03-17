@@ -33,7 +33,7 @@
         "prometheus": "DoNotStart",
         "promtail": "DoNotStart",
         "rabbitmq": "StartWithoutDebugging",
-        "unleash": "DoNotStart"
+        "unleash": "StartWithoutDebugging"
       }
     }
   }

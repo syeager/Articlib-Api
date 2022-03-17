@@ -28,3 +28,9 @@ internal sealed class ArticleConverter : ITypeConverter<ArticleDao, Valid<Articl
         return article;
     }
 }
+
+[SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+public sealed class ValidConverter<TSource, TDestination> : ITypeConverter<Valid<TSource>, TDestination>
+{
+    public TDestination Convert(Valid<TSource> source, TDestination destination, ResolutionContext context) => context.Mapper.Map<TDestination>(source.GetModelOrThrow());
+}
