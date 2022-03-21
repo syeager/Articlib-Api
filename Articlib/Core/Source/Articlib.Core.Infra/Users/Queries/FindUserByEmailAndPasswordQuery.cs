@@ -2,6 +2,7 @@ using Articlib.Core.Domain.Users;
 using Articlib.Core.Domain.Users.Queries;
 using Articlib.Core.Infra.Users.Entities;
 using AutoMapper;
+using LittleByte.Validation;
 using Microsoft.AspNetCore.Identity;
 
 namespace Articlib.Core.Infra.Users.Queries;
@@ -17,7 +18,7 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
         this.mapper = mapper;
     }
 
-    public async ValueTask<User?> TryFindAsync(Email email, Password password)
+    public async ValueTask<Valid<User>?> TryFindAsync(Email email, Password password)
     {
         var userEntity = await userManager.FindByEmailAsync(email.Value);
         if(userEntity is null)
@@ -30,7 +31,7 @@ internal sealed class FindUserByEmailAndPasswordQuery : IFindUserByEmailAndPassw
 
         if(correctPassword)
         {
-            var user = mapper.Map<User>(userEntity);
+            var user = mapper.Map<Valid<User>>(userEntity);
             return user;
         }
 
