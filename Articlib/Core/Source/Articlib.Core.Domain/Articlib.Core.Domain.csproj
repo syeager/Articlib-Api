@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
             <_Parameter1>Articlib.Core.Domain.Test</_Parameter1>
@@ -14,6 +14,7 @@
 
     <ItemGroup>
         <PackageReference Include="FluentValidation" Version="10.3.6" />
+        <PackageReference Include="HtmlAgilityPack" Version="1.11.42" />
         <PackageReference Include="SerilogMetrics" Version="2.1.0" />
         <PackageReference Update="JetBrains.Annotations" Version="2021.3.0" />
         <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.15.0" />
